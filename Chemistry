@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab Escape: Getting Ready for Level 2 Chemistry</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#2b0f52; --bg2:#1a1640; --card:#131a33; --card2:#1c2540; --line:#25496b;
+  --btn:#1f2a3e; --btnline:#2d6c8f; --text:#ffffff; --muted:#c9d1e6;
+  --pink:#f472b6; --label:#f0a3f5; --teal:#34d399; --gold:#fcd34d;
+  --good:#16a34a; --goodbg:#0f2f22; --bad:#f87171; --badbg:#3a1420;
+  --radius:22px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:"Nunito",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--text); font-weight:700; line-height:1.5; font-size:18px;
+  background:linear-gradient(160deg,var(--bg1) 0%,var(--bg2) 55%,#231a52 100%) fixed;
+  min-height:100vh;
+}
+.wrap{max-width:900px;margin:0 auto;padding:18px 16px 60px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.brand{display:flex;align-items:center;gap:10px;font-size:28px;font-weight:900;letter-spacing:.2px;
+  text-shadow:0 0 18px rgba(244,114,182,.45)}
+.brand .flask{font-size:30px}
+.pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:999px;
+  padding:9px 18px;font:inherit;font-size:16px;cursor:pointer;min-height:44px}
+.pill[aria-pressed="true"]{background:rgba(52,211,153,.25);border-color:var(--teal)}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+nav.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+nav.tabs button{flex:1 1 0;min-width:96px;min-height:52px;border-radius:16px;border:2px solid var(--btnline);
+  background:var(--card);color:#fff;font:inherit;font-size:19px;font-weight:900;cursor:pointer}
+nav.tabs button[aria-selected="true"]{background:linear-gradient(90deg,#c026d3,#db2777);border-color:#f9a8d4}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px 24px;margin-bottom:16px}
+.label{color:var(--label);font-weight:900;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;margin:0 0 6px}
+h2{font-size:26px;margin:0 0 8px;font-weight:900;line-height:1.25}
+h3{font-size:21px;margin:0 0 8px;font-weight:900;line-height:1.3}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+ul.pts{margin:0 0 12px;padding-left:22px}
+ul.pts li{margin-bottom:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.chips button{min-height:44px;padding:6px 14px;border-radius:999px;border:2px solid var(--btnline);background:var(--btn);
+  color:#fff;font:inherit;font-size:16px;cursor:pointer}
+.chips button[aria-current="true"]{background:var(--teal);color:#06261a;border-color:var(--teal)}
+table.t{border-collapse:collapse;width:100%;margin:6px 0 14px;font-size:17px}
+.tscroll{overflow-x:auto}
+table.t th,table.t td{border:1px solid #33496b;padding:8px 10px;text-align:left}
+table.t th{background:#1d2b4a;color:#fde68a}
+.key{background:#1b2547;border:1px solid #3b4f80;border-radius:14px;padding:12px 16px;margin:8px 0 14px}
+.eq{font-size:22px;font-weight:900;text-align:center;background:#0e1430;border-radius:14px;padding:14px;margin:8px 0 14px;border:1px solid #2b3c66}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 14px}
+.twocol>div{background:#1b2547;border:1px solid #3b4f80;border-radius:14px;padding:12px 14px}
+.good{color:#86efac}.bad{color:#fca5a5}
+/* worked examples */
+.we{background:#10183a;border:2px solid #3b2a6b;border-radius:18px;padding:18px;margin:12px 0 16px}
+.we .q{font-size:19px;margin-bottom:12px}
+ol.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+ol.steps li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:10px;align-items:start;
+  background:#182247;border-radius:12px;padding:10px 12px;margin-bottom:8px}
+ol.steps li::before{content:counter(s);width:34px;height:34px;border-radius:50%;background:var(--pink);color:#2a0b1e;
+  display:flex;align-items:center;justify-content:center;font-weight:900}
+ol.steps .why{display:block;color:#a7f3d0;font-size:16px;font-weight:700}
+ol.steps .why::before{content:"Why: ";font-weight:900}
+.reveal{min-height:48px;border-radius:14px;border:2px dashed var(--teal);background:transparent;color:var(--teal);
+  font:inherit;font-weight:900;padding:8px 16px;cursor:pointer;margin:4px 0 8px}
+.practice{background:#151d3d;border:1px solid #3b4f80;border-radius:16px;padding:16px;margin:12px 0}
+.practice ol{margin:6px 0 8px;padding-left:24px}
+.practice .ans{color:#a7f3d0}
+/* figures */
+.figs{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:center;margin:10px 0 16px}
+.fig{display:block;width:100%;background:#0d1330;border:1px solid #2b3c66;border-radius:16px;padding:10px;cursor:zoom-in;
+  color:#fff;font:inherit;text-align:center}
+.fig svg{display:block;width:100%;height:auto;margin:0 auto}
+.fig .cap{display:block;font-size:15px;color:var(--muted);margin-top:4px}
+.figs .fig{flex:1 1 300px;max-width:420px}
+.figs .arrow{font-size:34px;color:var(--gold);font-weight:900}
+.fig.wide{overflow-x:auto}
+.fig.wide svg{min-width:520px}
+.zoomhint{font-size:14px;color:var(--muted)}
+/* check questions */
+.check{background:#1a1238;border:2px solid #6b2a88;border-radius:18px;padding:18px;margin:14px 0}
+.opts{display:grid;gap:10px;margin-top:10px}
+.opt{width:100%;text-align:left;min-height:58px;padding:14px 18px;border-radius:16px;border:2px solid var(--btnline);
+  background:var(--btn);color:#fff;font:inherit;font-size:19px;font-weight:800;cursor:pointer;transition:transform .08s}
+.opt:hover:not([disabled]){border-color:#5fb4dd;transform:translateY(-1px)}
+.opt[disabled]{cursor:default}
+.opt.right{background:var(--goodbg);border-color:#22c55e}
+.opt.wrong{background:var(--badbg);border-color:var(--bad)}
+.opt .mark{float:right;font-weight:900}
+.fb{margin-top:12px;border-radius:14px;padding:12px 14px;font-size:17px}
+.fb.ok{background:var(--goodbg);border:1px solid #22c55e}
+.fb.no{background:var(--badbg);border:1px solid var(--bad)}
+.fb b{display:block;font-size:18px;margin-bottom:2px}
+.navrow{display:flex;justify-content:space-between;gap:10px;margin-top:8px}
+.navrow button,.big{min-height:52px;border-radius:16px;border:0;padding:10px 20px;font:inherit;font-weight:900;font-size:18px;cursor:pointer;
+  background:linear-gradient(90deg,#c026d3,#db2777);color:#fff}
+.navrow button.sec{background:var(--btn);border:2px solid var(--btnline)}
+.big.teal{background:linear-gradient(90deg,#0d9488,#22c55e)}
+/* watch */
+.vid{background:#151d3d;border:1px solid #3b4f80;border-radius:18px;padding:14px;margin:12px 0}
+.vframe{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#05081a}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vframe .play{position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;color:#fff;font:inherit;
+  background:radial-gradient(circle at 50% 45%,#3b1d6e 0%,#0b0f2a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.vframe .play .tri{width:78px;height:78px;border-radius:50%;background:#dc2626;display:flex;align-items:center;justify-content:center;font-size:30px}
+.vmeta{margin-top:10px}
+.vmeta a{color:#93c5fd;font-weight:800}
+.look{background:#1b2547;border-left:0;border-radius:10px;padding:8px 12px;margin-top:8px;font-size:17px}
+.look b{color:var(--gold)}
+/* quiz */
+.status{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;gap:8px;font-size:17px;font-weight:900}
+.status .k{color:var(--teal)}.status .s{color:var(--gold)}
+.bar{height:16px;border-radius:999px;background:#2d3a52;margin:10px 0 8px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#c026d3,#f472b6 40%,#34d399);border-radius:999px;transition:width .4s}
+.doors{display:flex;gap:6px;flex-wrap:wrap;font-size:22px}
+.doors span{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:#1f2a3e;border:1px solid #33496b}
+.doors span.open{background:#0f2f22;border-color:#22c55e}
+.doors span.now{border:2px solid var(--pink)}
+.qtext{font-size:22px;font-weight:900;line-height:1.35;margin:4px 0 6px}
+.doorname{font-size:15px;color:var(--muted);margin-bottom:6px}
+.keyrow{font-size:16px;color:var(--muted);margin-top:4px}
+.data{font-size:16px;color:#fde68a;background:#2a2410;border-radius:10px;padding:6px 10px;display:inline-block;margin:4px 0}
+.center{text-align:center}
+.hero{font-size:64px;line-height:1}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:14px 0}
+.statgrid div{background:#1b2547;border-radius:14px;padding:12px;text-align:center}
+.statgrid b{display:block;font-size:30px;color:var(--teal)}
+.doorlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin:12px 0}
+.doorlist div{background:#1b2547;border:1px solid #3b4f80;border-radius:14px;padding:10px 12px;font-size:16px}
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(5,6,20,.82);display:none;align-items:center;justify-content:center;z-index:50;padding:12px}
+.overlay.show{display:flex}
+.zoombox{background:#0d1330;border:2px solid #3b4f80;border-radius:18px;width:min(1100px,100%);max-height:94vh;overflow:auto;padding:12px;position:relative}
+.zoombox svg{width:100%;height:auto;min-width:min(900px,180vw)}
+.zoombox .close{position:fixed;top:16px;right:16px;z-index:60;background:#be185d;border-color:#f9a8d4}
+.celebrate{background:var(--card);border:2px solid var(--teal);border-radius:24px;padding:28px;text-align:center;max-width:460px;width:100%;position:relative;overflow:hidden}
+.confetti{position:absolute;inset:0;pointer-events:none}
+.confetti i{position:absolute;top:-12px;width:10px;height:14px;border-radius:2px;animation:fall 1.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(420px) rotate(540deg);opacity:.2}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+.celebrate .hero{animation:pop .5s ease-out}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:600px){
+  body{font-size:17px}
+  .wrap{padding:12px 10px 50px}
+  .card{padding:16px 14px}
+  .brand{font-size:22px}
+  .twocol{grid-template-columns:1fr}
+  .figs .fig{flex-basis:100%;max-width:none}
+  .figs .arrow{transform:rotate(90deg)}
+  .qtext{font-size:20px}
+  .opt{font-size:18px}
+  h2{font-size:23px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <div class="brand"><span class="flask" aria-hidden="true">🧪</span><span>Lab Escape</span></div>
+  <button class="pill" id="soundBtn" aria-pressed="false">🔇 Sound off</button>
+</header>
+<nav class="tabs" role="tablist" aria-label="Sections">
+  <button role="tab" id="tab-read" aria-controls="panel-read" aria-selected="true">📖 Read</button>
+  <button role="tab" id="tab-watch" aria-controls="panel-watch" aria-selected="false" tabindex="-1">▶️ Watch</button>
+  <button role="tab" id="tab-quiz" aria-controls="panel-quiz" aria-selected="false" tabindex="-1">🔐 Lab Escape</button>
+</nav>
+<main>
+<section id="panel-read" role="tabpanel" aria-labelledby="tab-read">
+  <div class="card">
+    <p class="label">Getting ready for Level 2 Chemistry</p>
+    <h2>Read and check</h2>
+    <p class="muted">Pick a part. Read each section carefully, follow the worked examples step by step, then try the check questions. Tap any diagram to make it bigger.</p>
+    <div class="chips" id="partChips" role="group" aria-label="Choose a part"></div>
+  </div>
+  <div id="readBody"></div>
+</section>
+<section id="panel-watch" role="tabpanel" aria-labelledby="tab-watch" hidden>
+  <div class="card">
+    <p class="label">Watch</p>
+    <h2>Short videos, part by part</h2>
+    <p class="muted">Each video matches a part of the Read section. Press play to load it here. If the player stays blank, use the YouTube link under it.</p>
+  </div>
+  <div id="watchBody"></div>
+</section>
+<section id="panel-quiz" role="tabpanel" aria-labelledby="tab-quiz" hidden>
+  <div id="quizBody"></div>
+</section>
+</main>
+</div>
+<div class="overlay" id="zoom" role="dialog" aria-modal="true" aria-label="Enlarged diagram">
+  <div class="zoombox"><button class="pill close" id="zoomClose">✕ Close</button><div id="zoomInner"></div></div>
+</div>
+<div class="overlay" id="party" role="dialog" aria-modal="true" aria-labelledby="partyTitle">
+  <div class="celebrate"><div class="confetti" id="confetti" aria-hidden="true"></div><div id="partyInner"></div></div>
+</div>
+<div class="sr" aria-live="polite" id="live"></div>
+<script>
+/* ---------- Diagram helpers (inline SVG) ---------- */
+const SVGNS = 'xmlns="http://www.w3.org/2000/svg"';
+const C = {line:'#9fb3d9', e:'#7dd3fc', eHi:'#f472b6', nuc:'#3b2a6b', nucLine:'#c4b5fd', txt:'#ffffff', gold:'#fcd34d', teal:'#34d399'};
+
+/* Shell (Bohr) diagram.
+   arr: electrons per shell, e.g. [2,8,1]
+   o: {sym, p, n, hiLast (highlight last outer electron), hiNew (highlight one electron in outer shell as gained),
+       ion: '+' | '2+' | '-' ..., title, label, gap (draw empty dashed spot in outer shell)} */
+function shellSVG(arr, o = {}) {
+  const radii = [52, 86, 120, 154];
+  const R = radii[arr.length - 1] + 22;
+  const W = Math.max(2 * R + (o.ion ? 70 : 20), 300);
+  const cx = W / 2, cy = R + 6;
+  const H = cy + R + 54;
+  let s = `<svg ${SVGNS} viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria || ''}">`;
+  arr.forEach((n, i) => {
+    s += `<circle cx="${cx}" cy="${cy}" r="${radii[i]}" fill="none" stroke="${C.line}" stroke-width="2.5"/>`;
+  });
+  s += `<circle cx="${cx}" cy="${cy}" r="36" fill="${C.nuc}" stroke="${C.nucLine}" stroke-width="2.5"/>`;
+  if (o.p !== undefined) {
+    s += `<text x="${cx}" y="${cy - 4}" text-anchor="middle" font-size="19" font-weight="800" fill="${C.txt}">${o.p}p</text>`;
+    s += `<text x="${cx}" y="${cy + 18}" text-anchor="middle" font-size="19" font-weight="800" fill="${C.txt}">${o.n}n</text>`;
+  } else {
+    s += `<text x="${cx}" y="${cy + 10}" text-anchor="middle" font-size="30" font-weight="900" fill="${C.txt}">?</text>`;
+  }
+  const pos = (n, i) => {
+    if (i === 0) return n === 1 ? [0] : [Math.PI, 0];
+    const comp = [0, Math.PI, -Math.PI / 2, Math.PI / 2];
+    if (n === 1) return [0];
+    if (n <= 4) return comp.slice(0, n);
+    const out = [];
+    const pairs = n - 4;
+    comp.forEach((t, j) => { if (j < pairs) out.push(t - 0.17, t + 0.17); else out.push(t); });
+    return out;
+  };
+  arr.forEach((n, i) => {
+    const r = radii[i];
+    const outer = i === arr.length - 1;
+    const angs = pos(n, i);
+    angs.forEach((ang, k) => {
+      const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+      let fill = C.e;
+      if (outer && ((o.hiLast && ang === 0) || (o.hiNew && k === angs.length - 1))) fill = C.eHi;
+      s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="8.5" fill="${fill}" stroke="#0b1026" stroke-width="2"/>`;
+    });
+    if (outer && o.gap) {
+      const full = pos(n + 1, i), ang = full[full.length - 1];
+      const x = cx + r * Math.cos(ang), y = cy + r * Math.sin(ang);
+      s += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="none" stroke="${C.eHi}" stroke-width="2.5" stroke-dasharray="4 3"/>`;
+    }
+  });
+  if (o.ion) {
+    const top = cy - R + 4, bot = cy + R - 4, l = cx - R + 6, rr = cx + R - 6;
+    s += `<path d="M${l + 14} ${top} H${l} V${bot} H${l + 14}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
+    s += `<path d="M${rr - 14} ${top} H${rr} V${bot} H${rr - 14}" fill="none" stroke="${C.gold}" stroke-width="3"/>`;
+    s += `<text x="${rr + 6}" y="${top + 22}" font-size="28" font-weight="900" fill="${C.gold}">${o.ion}</text>`;
+  }
+  if (o.label) s += `<text x="${cx}" y="${H - 16}" text-anchor="middle" font-size="26" font-weight="900" fill="${C.txt}">${o.label}</text>`;
+  s += '</svg>';
+  return s;
+}
+
+/* Periodic table section: first 20 elements, groups 1, 2, 13-18 */
+const PT = [
+  ['H',1,0,0],['He',2,7,0],
+  ['Li',3,0,1],['Be',4,1,1],['B',5,2,1],['C',6,3,1],['N',7,4,1],['O',8,5,1],['F',9,6,1],['Ne',10,7,1],
+  ['Na',11,0,2],['Mg',12,1,2],['Al',13,2,2],['Si',14,3,2],['P',15,4,2],['S',16,5,2],['Cl',17,6,2],['Ar',18,7,2],
+  ['K',19,0,3],['Ca',20,1,3]
+];
+const METALS = ['Li','Be','Na','Mg','Al','K','Ca'];
+function ptableSVG(o = {}) {
+  const cs = 66, L = 56, T = 52;
+  const W = L + 8 * cs + 12, H = T + 4 * cs + 64;
+  const groups = [1, 2, 13, 14, 15, 16, 17, 18];
+  let s = `<svg ${SVGNS} viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria || 'Periodic table of the first 20 elements, groups 1, 2 and 13 to 18, periods 1 to 4, with the staircase between metals and non-metals'}">`;
+  s += `<text x="4" y="${T - 12}" font-size="18" font-weight="800" fill="#c9d1e6">Group</text>`;
+  groups.forEach((g, i) => { s += `<text x="${L + i * cs + cs / 2}" y="${T - 12}" text-anchor="middle" font-size="20" font-weight="900" fill="#fde68a">${g}</text>`; });
+  for (let p = 0; p < 4; p++) s += `<text x="${L - 14}" y="${T + p * cs + cs / 2 + 7}" text-anchor="end" font-size="20" font-weight="900" fill="#fde68a">${p + 1}</text>`;
+  PT.forEach(([sym, z, c, r]) => {
+    const x = L + c * cs, y = T + r * cs;
+    const metal = METALS.includes(sym);
+    const hi = o.highlight === sym;
+    const fill = hi ? '#be185d' : (metal ? '#1e3a8a' : '#065f46');
+    s += `<rect x="${x + 2}" y="${y + 2}" width="${cs - 4}" height="${cs - 4}" rx="8" fill="${fill}" stroke="${hi ? '#fde68a' : '#0b1026'}" stroke-width="${hi ? 4 : 2}"/>`;
+    if (!(o.hideHighlightSym && hi)) {
+      s += `<text x="${x + 8}" y="${y + 22}" font-size="18" font-weight="800" fill="#e2e8f0">${z}</text>`;
+      s += `<text x="${x + cs / 2}" y="${y + cs - 12}" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">${sym}</text>`;
+    } else {
+      s += `<text x="${x + cs / 2}" y="${y + cs - 16}" text-anchor="middle" font-size="30" font-weight="900" fill="#fff">?</text>`;
+    }
+  });
+  // staircase between metals and non-metals
+  const sx1 = L + 2 * cs, sx2 = L + 3 * cs, y1 = T + cs, y2 = T + 2 * cs, y3 = T + 3 * cs, y4 = T + 4 * cs;
+  s += `<path d="M${sx1} ${y1} V${y2} H${sx2} V${y4}" fill="none" stroke="${C.gold}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>`;
+  const ly = H - 22;
+  s += `<rect x="${L}" y="${ly - 18}" width="24" height="24" rx="5" fill="#1e3a8a"/><text x="${L + 32}" y="${ly}" font-size="19" font-weight="800" fill="#fff">metal</text>`;
+  s += `<rect x="${L + 120}" y="${ly - 18}" width="24" height="24" rx="5" fill="#065f46"/><text x="${L + 152}" y="${ly}" font-size="19" font-weight="800" fill="#fff">non-metal</text>`;
+  s += `<line x1="${L + 280}" y1="${ly - 6}" x2="${L + 318}" y2="${ly - 6}" stroke="${C.gold}" stroke-width="6"/><text x="${L + 326}" y="${ly}" font-size="19" font-weight="800" fill="#fff">staircase</text>`;
+  s += '</svg>';
+  return s;
+}
+
+/* Lewis diagrams */
+function dots(x, y, vertical) {
+  // a lone pair: two dots
+  return vertical
+    ? `<circle cx="${x}" cy="${y - 9}" r="6" fill="${C.eHi}"/><circle cx="${x}" cy="${y + 9}" r="6" fill="${C.eHi}"/>`
+    : `<circle cx="${x - 9}" cy="${y}" r="6" fill="${C.eHi}"/><circle cx="${x + 9}" cy="${y}" r="6" fill="${C.eHi}"/>`;
+}
+function atom(x, y, sym) { return `<text x="${x}" y="${y + 14}" text-anchor="middle" font-size="42" font-weight="900" fill="#fff">${sym}</text>`; }
+function bond(x1, y1, x2, y2, n = 1) {
+  let s = '';
+  const dx = x2 - x1, dy = y2 - y1, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len;
+  const offs = n === 1 ? [0] : n === 2 ? [-7, 7] : [-12, 0, 12];
+  offs.forEach(o => { s += `<line x1="${x1 + nx * o}" y1="${y1 + ny * o}" x2="${x2 + nx * o}" y2="${y2 + ny * o}" stroke="${C.e}" stroke-width="5" stroke-linecap="round"/>`; });
+  return s;
+}
+function note(x, y, t, anchor = 'middle', col = '#c9d1e6') { return `<text x="${x}" y="${y}" text-anchor="${anchor}" font-size="21" font-weight="800" fill="${col}">${t}</text>`; }
+function lewisSVG(kind, o = {}) {
+  const ann = o.annotate !== false;
+  let s = '', W = 420, H = 260, aria = '';
+  if (kind === 'water') {
+    aria = 'Lewis diagram of water: oxygen in the middle bonded to two hydrogens by single bonds, with two lone pairs on oxygen';
+    s += atom(90, 130, 'H') + atom(210, 130, 'O') + atom(330, 130, 'H');
+    s += bond(116, 130, 184, 130) + bond(236, 130, 304, 130);
+    s += dots(210, 86) + dots(210, 176);
+    if (ann) { s += note(210, 40, 'lone pair', 'middle', C.eHi) + note(184, 176, 'bonding pair', 'end', C.e) + note(210, 230, 'lone pair', 'middle', C.eHi); }
+  } else if (kind === 'ammonia') {
+    H = 300; aria = 'Lewis diagram of ammonia: nitrogen in the middle bonded to three hydrogens, with one lone pair on nitrogen';
+    s += atom(90, 120, 'H') + atom(210, 120, 'N') + atom(330, 120, 'H') + atom(210, 240, 'H');
+    s += bond(116, 120, 184, 120) + bond(236, 120, 304, 120) + bond(210, 148, 210, 212);
+    s += dots(210, 76);
+    if (ann) s += note(210, 36, 'lone pair', 'middle', C.eHi) + note(184, 172, 'bonding pair', 'end', C.e);
+  } else if (kind === 'methane') {
+    H = 320; aria = 'Lewis diagram of methane: carbon in the middle bonded to four hydrogens, with no lone pairs';
+    s += atom(210, 160, 'C') + atom(90, 160, 'H') + atom(330, 160, 'H') + atom(210, 50, 'H') + atom(210, 270, 'H');
+    s += bond(116, 160, 184, 160) + bond(236, 160, 304, 160) + bond(210, 76, 210, 132) + bond(210, 188, 210, 244);
+  } else if (kind === 'n2') {
+    H = 220; aria = 'Lewis diagram of nitrogen, N2: two nitrogen atoms joined by a triple bond, with one lone pair on each nitrogen';
+    s += atom(150, 110, 'N') + atom(270, 110, 'N');
+    s += bond(176, 110, 244, 110, 3);
+    s += dots(110, 110, true) + dots(310, 110, true);
+    if (ann) s += note(210, 60, 'triple bond: 3 shared pairs', 'middle', C.e) + note(210, 190, 'one lone pair on each N', 'middle', C.eHi);
+  } else if (kind === 'co2') {
+    W = 460; H = 240; aria = 'Lewis diagram of carbon dioxide: oxygen, carbon, oxygen joined by two double bonds, with two lone pairs on each oxygen';
+    s += atom(90, 120, 'O') + atom(230, 120, 'C') + atom(370, 120, 'O');
+    s += bond(118, 120, 202, 120, 2) + bond(258, 120, 342, 120, 2);
+    s += dots(90, 76) + dots(90, 166) + dots(370, 76) + dots(370, 166);
+    if (ann) s += note(230, 60, 'double bonds: 2 shared pairs each', 'middle', C.e) + note(230, 220, 'two lone pairs on each O', 'middle', C.eHi);
+  }
+  return `<svg ${SVGNS} viewBox="0 0 ${W} ${H}" role="img" aria-label="${aria}">${s}</svg>`;
+}
+
+/* Ionic lattice (2D slice) */
+function latticeSVG() {
+  const cols = 6, rows = 4, g = 64, L = 40, T = 40;
+  const W = L * 2 + (cols - 1) * g, H = T * 2 + (rows - 1) * g + 40;
+  let s = `<svg ${SVGNS} viewBox="0 0 ${W} ${H}" role="img" aria-label="An ionic lattice: sodium ions and chloride ions alternate in every direction">`;
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const x = L + c * g, y = T + r * g;
+    if (c < cols - 1) s += `<line x1="${x}" y1="${y}" x2="${x + g}" y2="${y}" stroke="#334a70" stroke-width="2"/>`;
+    if (r < rows - 1) s += `<line x1="${x}" y1="${y}" x2="${x}" y2="${y + g}" stroke="#334a70" stroke-width="2"/>`;
+  }
+  for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) {
+    const x = L + c * g, y = T + r * g, pos = (r + c) % 2 === 0;
+    s += pos ? `<circle cx="${x}" cy="${y}" r="19" fill="#7c3aed" stroke="#ddd6fe" stroke-width="2"/><text x="${x}" y="${y + 8}" text-anchor="middle" font-size="24" font-weight="900" fill="#fff">+</text>`
+             : `<circle cx="${x}" cy="${y}" r="27" fill="#047857" stroke="#a7f3d0" stroke-width="2"/><text x="${x}" y="${y + 8}" text-anchor="middle" font-size="26" font-weight="900" fill="#fff">−</text>`;
+  }
+  s += `<circle cx="${L}" cy="${H - 18}" r="12" fill="#7c3aed"/><text x="${L + 20}" y="${H - 11}" font-size="19" font-weight="800" fill="#fff">Na⁺</text>`;
+  s += `<circle cx="${L + 120}" cy="${H - 18}" r="15" fill="#047857"/><text x="${L + 143}" y="${H - 11}" font-size="19" font-weight="800" fill="#fff">Cl⁻</text>`;
+  return s + '</svg>';
+}
+
+/* A simple "atoms on each side" balance picture for H2 + O2 -> H2O */
+function figure(svg, cap, cls = '') {
+  return `<button type="button" class="fig ${cls}" aria-label="Enlarge diagram${cap ? ': ' + cap.replace(/<[^>]+>/g, '') : ''}">${svg}${cap ? `<span class="cap">${cap}</span>` : ''}<span class="zoomhint">Tap to enlarge</span></button>`;
+}
+/* ---------- Read section content ---------- */
+function we(label, title, q, steps) {
+  return `<div class="we"><p class="label">${label}</p><h3>${title}</h3><p class="q">${q}</p><ol class="steps">${
+    steps.map(([t, w]) => `<li><span>${t}${w ? `<span class="why">${w}</span>` : ''}</span></li>`).join('')}</ol></div>`;
+}
+let _rv = 0;
+function yourTurn(title, q, steps) {
+  const id = 'rv' + (++_rv);
+  return `<div class="we"><p class="label">Your turn</p><h3>${title}</h3><p class="q">${q}</p>
+  <p class="muted">Have a go on paper first. Then check your steps.</p>
+  <button type="button" class="reveal" aria-expanded="false" aria-controls="${id}">Show the steps</button>
+  <ol class="steps" id="${id}" hidden>${steps.map(([t, w]) => `<li><span>${t}${w ? `<span class="why">${w}</span>` : ''}</span></li>`).join('')}</ol></div>`;
+}
+function practice(title, instr, items, hint) {
+  const id = 'rv' + (++_rv);
+  return `<div class="practice"><p class="label">Practice on paper</p><h3>${title}</h3><p class="muted">${instr}</p>
+  <ol>${items.map(([q]) => `<li>${q}</li>`).join('')}</ol>${hint ? `<p class="muted">Hint: ${hint}</p>` : ''}
+  <button type="button" class="reveal" aria-expanded="false" aria-controls="${id}">Show the answers</button>
+  <ol id="${id}" class="ans" hidden>${items.map(([q, a]) => `<li>${q}: <b>${a}</b></li>`).join('')}</ol></div>`;
+}
+function tbl(head, rows) {
+  return `<div class="tscroll"><table class="t"><thead><tr>${head.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${
+    rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+}
+function learn(label, title, body) { return `<div class="card"><p class="label">${label}</p><h2>${title}</h2>${body}</div>`; }
+function pts(arr) { return `<ul class="pts">${arr.map(x => `<li>${x}</li>`).join('')}</ul>`; }
+function vidNote(t) { return `<p class="muted">▶ Video for this: <b>${t}</b> (see the Watch tab).</p>`; }
+
+const PARTS = [
+{ id: 'p1', chip: '1 Atoms', title: 'Part 1 · Atomic anatomy', sub: 'What atoms are made of, and where the electrons go',
+  html: () =>
+  learn('Learn', 'Inside an atom',
+    `<p>An atom has a tiny <b>nucleus</b> (the centre of the atom) made of protons and neutrons. Electrons move around the nucleus in layers called <b>shells</b>.</p>` +
+    tbl(['Particle', 'Where', 'Charge', 'Mass'], [['proton', 'nucleus', '+1', '1'], ['neutron', 'nucleus', '0', '1'], ['electron', 'shells', '−1', 'almost 0']]) +
+    pts(['Protons are positive (+), electrons are negative (−) and neutrons have no charge.', 'An atom has as many electrons as protons, so it is <b>neutral</b> (no overall charge).']) +
+    vidNote('Parts of an atom')) +
+  learn('Learn', 'Atomic number and mass number',
+    pts(['<b>Atomic number (Z)</b> = the number of protons. It is what makes an element that element.', 'In a neutral atom, electrons = protons.',
+         '<b>Mass number (A)</b> = protons + neutrons. Electrons are too light to count.', 'So neutrons = mass number − atomic number.']) +
+    `<div class="eq">neutrons = A − Z</div>` + vidNote('Atomic number and mass number') +
+    we('Worked example', 'Counting the particles in an atom', 'A fluorine atom has atomic number 9 and mass number 19. How many protons, neutrons and electrons does it have?', [
+      ['Protons = 9', 'the atomic number is the number of protons'],
+      ['Electrons = 9', 'a neutral atom has as many electrons as protons'],
+      ['Neutrons = 19 − 9 = 10', 'mass number − atomic number']]) +
+    practice('Count the particles', 'Give the number of protons, neutrons and electrons in each atom.', [
+      ['Sodium: atomic number 11, mass number 23', '11 protons, 12 neutrons, 11 electrons'],
+      ['Magnesium: atomic number 12, mass number 24', '12 protons, 12 neutrons, 12 electrons'],
+      ['Chlorine: atomic number 17, mass number 35', '17 protons, 18 neutrons, 17 electrons'],
+      ['Potassium: atomic number 19, mass number 39', '19 protons, 20 neutrons, 19 electrons'],
+      ['20 protons and 20 neutrons: what is the mass number, and which element?', 'mass number 40; calcium (atomic number 20)']])) +
+  learn('Learn', 'Electrons fill shells in order',
+    pts(['Electrons fill the shell nearest the nucleus first.', 'Shell 1 holds up to 2, shell 2 up to 8, shell 3 up to 8.', 'Any left over go in shell 4 (potassium and calcium).',
+         'The numbers in each shell, with commas, are the <b>electron arrangement</b>.', 'Electrons in the outer shell are the <b>valence electrons</b>.']) +
+    tbl(['Shell', 'Holds up to'], [['1', '2'], ['2', '8'], ['3', '8 (up to calcium)'], ['4', 'the rest']]) +
+    `<div class="figs">${figure(shellSVG([2, 8, 1], { p: 11, n: 12, label: 'Na  2,8,1', aria: 'Shell diagram of a sodium atom: a nucleus with 11 protons and 12 neutrons, and 11 electrons in shells of 2, 8 and 1' }), 'Sodium has 11 electrons: 2 in shell 1, 8 in shell 2 and 1 in shell 3.')}</div>` +
+    vidNote('Electron configuration diagrams') +
+    we('Worked example', 'Writing an electron arrangement', 'Write the electron arrangement of sulfur (atomic number 16). How many valence electrons does it have?', [
+      ['16 electrons to place', 'neutral atom: electrons = atomic number'],
+      ['Shell 1: 2 (14 left)', 'shell 1 is full with 2'],
+      ['Shell 2: 8 (6 left)', 'shell 2 is full with 8'],
+      ['Shell 3: 6', 'the last 6 go in shell 3'],
+      ['Sulfur is 2,8,6: 6 valence electrons', 'the outer shell has 6']]) +
+    yourTurn('Calcium', 'Write the electron arrangement of calcium (atomic number 20).', [
+      ['20 electrons to place', 'atomic number 20'],
+      ['Shell 1: 2 (18 left)', 'shell 1 is full with 2'],
+      ['Shell 2: 8 (10 left)', 'shell 2 is full with 8'],
+      ['Shell 3: 8 (2 left)', 'shell 3 holds up to 8, up to calcium'],
+      ['Shell 4: 2, so calcium is 2,8,8,2', 'the last 2 go in shell 4: 2 valence electrons']]) +
+    practice('Electron arrangements', 'Write the electron arrangement and the number of valence electrons.', [
+      ['Oxygen (atomic number 8)', '2,6 · 6 valence electrons'], ['Aluminium (atomic number 13)', '2,8,3 · 3 valence electrons'],
+      ['Chlorine (atomic number 17)', '2,8,7 · 7 valence electrons'], ['Argon (atomic number 18)', '2,8,8 · 8 valence electrons'],
+      ['Potassium (atomic number 19)', '2,8,8,1 · 1 valence electron'], ['Lithium (atomic number 3)', '2,1 · 1 valence electron']])),
+  checks: [
+    { q: 'An atom has the electron arrangement 2,8,3. Which element is it?', a: 'Aluminium', w: ['Boron', 'Lithium', 'Sodium'],
+      e: 'Add up all the electrons: 2 + 8 + 3 = 13. A neutral atom has 13 protons, so the atomic number is 13: aluminium.' },
+    { q: 'Sodium (11 electrons) is 2,8,1. Potassium has 19 electrons. What is potassium\'s electron arrangement?', a: '2,8,8,1', w: ['2,8,9', '2,9,8', '2,8,8,2'],
+      e: 'Fill shells 1, 2 and 3 first: 2, 8, 8. That uses 18 electrons, so the last 1 goes in shell 4.' },
+    { q: 'A chlorine atom has atomic number 17 and mass number 35. How many neutrons does it have?', a: '18', w: ['17', '35', '52'],
+      e: 'Neutrons = mass number − atomic number = 35 − 17 = 18.' }]
+},
+{ id: 'p2', chip: '2 Table', title: 'Part 2 · The periodic table is a map', sub: 'Read electron arrangements straight off the table',
+  html: () =>
+  learn('Learn', 'Reading the periodic table',
+    `<p>Each column is a <b>group</b>. Each row is a <b>period</b>. The small number in each box is the atomic number.</p>` +
+    `<div class="figs">${figure(ptableSVG(), 'The first 20 elements. Metals are left of the gold staircase; non-metals are right of it.', 'wide')}</div>`) +
+  learn('Learn', 'The table is your cheat sheet',
+    pts(['The <b>group</b> gives the valence electrons: groups 1 and 2 → 1 and 2; groups 13 to 18 → 3 to 8.', 'The <b>period</b> (row) gives the number of shells.',
+         'Metals are left of the staircase; non-metals are right of it.', 'Group 18, the <b>noble gases</b>, have full outer shells (helium\'s is full with 2).']) +
+    `<div class="twocol"><div><b>Group 15</b><br>5 valence electrons: N, P</div><div><b>Period 3</b><br>3 shells: Na to Ar</div></div>` +
+    `<div class="key"><b>Phosphorus:</b> group 15, period 3 → 2,8,5</div>` + vidNote('What are periods and groups in the periodic table?') +
+    we('Worked example', 'Reading an arrangement off the table', 'Phosphorus is in period 3, group 15. Write its electron arrangement without counting all its electrons.', [
+      ['Period 3 → 3 shells', 'the period is the number of shells'],
+      ['Group 15 → 5 valence electrons', 'groups 13 to 18: drop the 1'],
+      ['The inner shells are full: 2, then 8', 'every shell inside the outer one is full'],
+      ['Phosphorus is 2,8,5', 'check: 2 + 8 + 5 = 15, its atomic number']]) +
+    practice('Use the table', 'For each element, give the period, group, valence electrons, and say whether it is a metal or non-metal.', [
+      ['Magnesium, Mg', 'period 3, group 2, 2 valence electrons, metal'], ['Nitrogen, N', 'period 2, group 15, 5 valence electrons, non-metal'],
+      ['Sulfur, S', 'period 3, group 16, 6 valence electrons, non-metal'], ['Potassium, K', 'period 4, group 1, 1 valence electron, metal'],
+      ['Fluorine, F', 'period 2, group 17, 7 valence electrons, non-metal']])),
+  checks: [
+    { q: 'A student wrote: "Chlorine is in period 3, so it has 3 valence electrons." What is wrong?', a: 'The period gives shells. Chlorine is in group 17, so it has 7 valence electrons.',
+      w: ['Nothing. The period gives the valence electrons.', 'Chlorine is in period 7, so it has 7 valence electrons.', 'Chlorine has 17 valence electrons, one for each proton.'],
+      e: 'The period tells you the number of shells (3). The group tells you the valence electrons: group 17 → 7. Chlorine is 2,8,7.' },
+    { q: 'Which element is in period 2 and group 16?', a: 'Oxygen', w: ['Sulfur', 'Carbon', 'Nitrogen'],
+      e: 'Period 2 is the second row (Li to Ne). Group 16 is the column with 6 valence electrons. That box is oxygen, 2,6.' },
+    { q: 'Is magnesium a metal or a non-metal?', a: 'A metal, because it is left of the staircase', w: ['A non-metal, because it is right of the staircase', 'A non-metal, because it is in period 3', 'A metal, because it is in group 16'],
+      e: 'Magnesium is in group 2, to the left of the staircase. Everything left of the staircase is a metal.' }]
+},
+{ id: 'p3', chip: '3 Stability', title: 'Part 3 · The drive for stability', sub: 'Why atoms gain, lose or share electrons',
+  html: () =>
+  learn('Learn', 'Full outer shells are stable',
+    pts(['The noble gases (group 18) hardly react: their outer shells are full.', 'Helium 2 · neon 2,8 · argon 2,8,8',
+         'Other atoms react to get a full outer shell, usually of 8. This is the <b>octet rule</b> ("octet" means a set of eight).', 'They do it by losing, gaining or sharing electrons.']) +
+    `<div class="tscroll"><table class="t"><thead><tr><th scope="col">Lose</th><th scope="col">Gain</th><th scope="col">Share</th></tr></thead><tbody><tr>
+      <td>metals (1 to 3 valence electrons) → positive ions</td><td>non-metals (5 to 7 valence electrons) → negative ions</td><td>two non-metals → covalent bonds</td></tr></tbody></table></div>`) +
+  learn('Learn', 'Lose or gain? The shorter way wins',
+    `<div class="twocol"><div><b>Sodium, Na  2,8,1</b><br>Lose 1 electron, or gain 7?<br><span class="good">Losing 1 is easier.</span><br>Becomes Na⁺: 2,8, like neon.</div>
+     <div><b>Chlorine, Cl  2,8,7</b><br>Gain 1 electron, or lose 7?<br><span class="good">Gaining 1 is easier.</span><br>Becomes Cl⁻: 2,8,8, like argon.</div></div>` +
+    `<div class="figs">${figure(shellSVG([2, 8, 1], { p: 11, n: 12, hiLast: true, label: 'Na  2,8,1', aria: 'Sodium atom, 2,8,1, with its one outer electron highlighted' }), 'Sodium: 1 outer electron to lose')}<span class="arrow" aria-hidden="true">→</span>${figure(shellSVG([2, 8], { p: 11, n: 12, ion: '+', label: 'Na⁺  2,8', aria: 'Sodium ion, 2,8, with a plus charge' }), 'Na⁺: a full outer shell, like neon')}</div>` +
+    `<p class="muted">Part 3 has no video. Read this section carefully, then try the checks below.</p>`),
+  checks: [
+    { q: 'Magnesium is 2,8,2. What will a magnesium atom do?', a: 'Lose 2 electrons to form Mg²⁺, which is 2,8', w: ['Gain 6 electrons to form Mg⁶⁻, which is 2,8,8', 'Lose 2 electrons to form Mg²⁻, which is 2,8', 'Gain 2 electrons to form Mg²⁺, which is 2,8,4'],
+      e: 'Losing 2 is much easier than gaining 6. Losing electrons (negative) leaves more protons, so the ion is positive: Mg²⁺, 2,8, like neon.' },
+    { q: 'Why do the noble gases (group 18) hardly react?', a: 'Their outer shells are already full', w: ['They have no electrons', 'They are metals', 'Their nucleus has no protons'],
+      e: 'Atoms react to get a full outer shell. The noble gases already have one (helium 2, neon 2,8, argon 2,8,8), so they have no reason to react.' },
+    { q: 'Chlorine is 2,8,7. Which ion forms most easily?', a: 'Cl⁻, by gaining 1 electron', w: ['Cl⁷⁺, by losing 7 electrons', 'Cl⁺, by losing 1 electron', 'Cl⁷⁻, by gaining 7 electrons'],
+      e: 'Gaining 1 electron is the shorter way to a full outer shell. One extra electron gives a 1− charge: Cl⁻, 2,8,8, like argon.' }]
+},
+{ id: 'p4', chip: '4 Ions', title: 'Part 4 · Ions', sub: 'Cations, anions and polyatomic ions',
+  html: () =>
+  learn('Learn', 'Cations and anions',
+    pts(['An <b>ion</b> is an atom, or group of atoms, with a charge.', 'Metals lose electrons → positive ions, called <b>cations</b>.', 'Non-metals gain electrons → negative ions, called <b>anions</b>.',
+         'The charge is the number of electrons lost (+) or gained (−).', 'A cation keeps its name (sodium ion). A simple anion ends in <b>-ide</b> (chloride).']) +
+    `<div class="twocol"><div><b>Cation (+)</b><br>metal loses electrons<br>more protons than electrons<br>Na⁺, Mg²⁺, Al³⁺</div><div><b>Anion (−)</b><br>non-metal gains electrons<br>more electrons than protons<br>Cl⁻, O²⁻, N³⁻</div></div>` +
+    vidNote('What are ions')) +
+  learn('Learn', 'Ion charges from the periodic table',
+    tbl(['Group', 'Valence electrons', 'Lose or gain', 'Ion charge', 'Example'], [
+      ['1', '1', 'lose 1', '+1', 'Na⁺ sodium'], ['2', '2', 'lose 2', '+2', 'Mg²⁺ magnesium'], ['13', '3', 'lose 3', '+3', 'Al³⁺ aluminium'],
+      ['15', '5', 'gain 3', '−3', 'N³⁻ nitride'], ['16', '6', 'gain 2', '−2', 'O²⁻ oxide'], ['17', '7', 'gain 1', '−1', 'Cl⁻ chloride'], ['18', '8 (full)', 'neither', 'no ion', 'Ne, Ar']]) +
+    practice('Predict the ions', 'Write the symbol and charge of each element\'s ion, and the ion\'s name.', [
+      ['Potassium', 'K⁺, potassium ion'], ['Calcium', 'Ca²⁺, calcium ion'], ['Aluminium', 'Al³⁺, aluminium ion'], ['Sulfur', 'S²⁻, sulfide'], ['Fluorine', 'F⁻, fluoride'], ['Nitrogen', 'N³⁻, nitride']])) +
+  learn('Learn', 'Polyatomic ions',
+    pts(['A <b>polyatomic ion</b> is a group of bonded atoms with an overall charge ("poly" means many).', 'It stays together in reactions: treat it as one unit.', 'Most end in -ate and contain oxygen.', 'Learn these: you cannot read them off the periodic table.']) +
+    tbl(['Name', 'Formula'], [['hydroxide', 'OH⁻'], ['nitrate', 'NO₃⁻'], ['hydrogen carbonate', 'HCO₃⁻'], ['carbonate', 'CO₃²⁻'], ['sulfate', 'SO₄²⁻'], ['phosphate', 'PO₄³⁻'], ['ammonium', 'NH₄⁺']]) +
+    vidNote('What\'s a polyatomic ion?')) +
+  learn('Learn', 'Metals with more than one ion',
+    pts(['Some metals, the <b>transition metals</b>, can form more than one ion.', 'A Roman numeral in the name gives the charge: iron(II) is Fe²⁺, iron(III) is Fe³⁺.', 'Learn these too: you cannot read them off the table.']) +
+    tbl(['Name', 'Ion'], [['iron(II)', 'Fe²⁺'], ['iron(III)', 'Fe³⁺'], ['copper(II)', 'Cu²⁺'], ['zinc', 'Zn²⁺'], ['silver', 'Ag⁺'], ['lead(II)', 'Pb²⁺']]) +
+    practice('Name it or write it', 'Write the name of each formula, or the formula of each name.', [
+      ['NO₃⁻', 'nitrate'], ['ammonium', 'NH₄⁺'], ['CO₃²⁻', 'carbonate'], ['hydroxide', 'OH⁻'], ['Fe³⁺', 'iron(III) ion'], ['O²⁻', 'oxide']])),
+  checks: [
+    { q: 'Which is the formula of the sulfate ion?', a: 'SO₄²⁻', w: ['S²⁻', 'SO₄⁻', 'SO₃²⁻'],
+      e: 'Sulfate is SO₄²⁻: one S, four O and a 2− charge. S²⁻ is sulfide, a single atom.' },
+    { q: 'Nitrogen is in group 15. Which ion does it form?', a: 'N³⁻, nitride', w: ['N⁵⁺, nitrogen ion', 'N³⁺, nitride', 'NO₃⁻, nitrate'],
+      e: 'Group 15 has 5 valence electrons. Gaining 3 is easier than losing 5, so the charge is 3−. A simple anion ends in -ide: nitride.' },
+    { q: 'What is a cation?', a: 'A positive ion, formed when an atom loses electrons', w: ['A negative ion, formed when an atom gains electrons', 'A positive ion, formed when an atom gains electrons', 'A neutral atom with a full outer shell'],
+      e: 'Losing electrons leaves more protons than electrons, so the ion is positive. Metals form cations, such as Na⁺.' }]
+},
+{ id: 'p5', chip: '5 Formulae', title: 'Part 5 · Writing ionic formulae', sub: 'Swap and drop, then name it',
+  html: () =>
+  learn('Learn', 'Ionic compounds have no overall charge',
+    `<div class="eq">Mg²⁺ + 2 Cl⁻ → MgCl₂<br><span class="muted" style="font-size:18px">(+2) + 2 × (−1) = 0: no overall charge</span></div>` +
+    pts(['In an ionic compound, the positive charges cancel the negative charges.', 'The formula shows the ratio of ions: NaCl is 1 Na⁺ to 1 Cl⁻.', 'Mg²⁺ needs two Cl⁻ to cancel its charge: MgCl₂.', 'A small number (a <b>subscript</b>) counts the ion just before it.']) +
+    vidNote('Writing ionic formulas: introduction') +
+    we('Worked example', 'Swap and drop: aluminium oxide', 'Write the formula of aluminium oxide.', [
+      ['Ions: Al³⁺ and O²⁻', 'Al is in group 13; O is in group 16'],
+      ['Swap the charge numbers and drop them down: Al₂O₃', 'Al takes O\'s 2; O takes Al\'s 3'],
+      ['Check: 2 × (+3) = +6 and 3 × (−2) = −6', '+6 and −6 cancel'],
+      ['If both numbers can be divided, cancel down: Mg²⁺ and O²⁻ make MgO, not Mg₂O₂', 'a formula is the simplest ratio']]) +
+    we('Worked example', 'Swap and drop with a polyatomic ion', 'Write the formula of calcium hydroxide.', [
+      ['Ions: Ca²⁺ and OH⁻', 'hydroxide is a polyatomic ion'],
+      ['Swap and drop: one Ca, two OH', 'two OH⁻ cancel one Ca²⁺'],
+      ['Write it as Ca(OH)₂', 'brackets keep the OH together; do not write a 1'],
+      ['Check: (+2) + 2 × (−1) = 0', 'no overall charge']]) +
+    `<div class="key"><b>Spot the mistake:</b> calcium nitrate is <span class="good">Ca(NO₃)₂</span>, not <span class="bad">CaNO₃₂</span>. Without brackets, "₃₂" reads as 32 oxygens. Brackets show there are two whole NO₃⁻ ions.</div>` +
+    practice('Write the formulae', 'Swap and drop, then check that the charges cancel.', [
+      ['potassium chloride', 'KCl'], ['calcium chloride', 'CaCl₂'], ['sodium oxide', 'Na₂O'], ['magnesium oxide (hint: cancel down)', 'MgO'],
+      ['aluminium sulfate (hint: brackets round a polyatomic ion when there is more than one)', 'Al₂(SO₄)₃'], ['ammonium nitrate', 'NH₄NO₃']])) +
+  learn('Learn', 'Naming ionic compounds',
+    pts(['Name the metal (the positive ion) first, unchanged.', 'Then the negative ion: a single element ends in -ide; a polyatomic ion keeps its name.', 'A metal with more than one ion gets its Roman numeral: iron(III) chloride.', 'No di- or tri- for ionic compounds: MgCl₂ is magnesium chloride.']) +
+    tbl(['Formula', 'Name'], [['NaCl', 'sodium chloride'], ['MgO', 'magnesium oxide'], ['K₂SO₄', 'potassium sulfate'], ['FeCl₃', 'iron(III) chloride'], ['NH₄Cl', 'ammonium chloride']]) +
+    vidNote('Formulae of ionic compounds and their names, part 1') +
+    practice('Name them', 'Write the name of each compound.', [
+      ['CaBr₂', 'calcium bromide'], ['Li₂O', 'lithium oxide'], ['Na₂CO₃', 'sodium carbonate'], ['Cu(NO₃)₂', 'copper(II) nitrate'], ['(NH₄)₂SO₄', 'ammonium sulfate'],
+      ['FeO (hint: work out iron\'s charge from oxide\'s 2−)', 'iron(II) oxide']])),
+  checks: [
+    { q: 'A student wrote calcium nitrate as CaNO₃₂. What is the correct formula?', a: 'Ca(NO₃)₂', w: ['CaNO₃₂', 'CaNO₃', 'Ca₂NO₃'],
+      e: 'Ca²⁺ needs two NO₃⁻ ions. Brackets keep each nitrate together, and the 2 after the bracket counts the whole ion.' },
+    { q: 'What is the formula of magnesium oxide?', a: 'MgO', w: ['Mg₂O₂', 'MgO₂', 'Mg₂O'],
+      e: 'Mg²⁺ and O²⁻: swapping gives Mg₂O₂, but a formula is the simplest ratio, so cancel down to MgO.' },
+    { q: 'What is the name of FeCl₃?', a: 'iron(III) chloride', w: ['iron trichloride', 'iron(II) chloride', 'iron chlorine'],
+      e: 'Three Cl⁻ give 3−, so iron must be Fe³⁺. The Roman numeral gives the charge. Ionic names never use tri-.' }]
+},
+{ id: 'p6', chip: '6 Bonding', title: 'Part 6 · Ionic and covalent bonding', sub: 'Transferring electrons, or sharing them',
+  html: () =>
+  learn('Learn', 'Ionic bonding: sodium gives chlorine an electron',
+    `<p>Sodium (2,8,1) has one outer electron. Chlorine (2,8,7) needs one more. Sodium's outer electron moves to chlorine.</p>` +
+    `<div class="figs">${figure(shellSVG([2, 8, 1], { p: 11, n: 12, hiLast: true, label: 'Na  2,8,1', aria: 'Sodium atom 2,8,1, outer electron highlighted' }), 'This pink electron moves…')}<span class="arrow" aria-hidden="true">→</span>${figure(shellSVG([2, 8, 7], { p: 17, n: 18, gap: true, label: 'Cl  2,8,7', aria: 'Chlorine atom 2,8,7 with an empty space in the outer shell' }), '…into this gap in chlorine\'s outer shell')}</div>` +
+    `<div class="figs">${figure(shellSVG([2, 8], { p: 11, n: 12, ion: '+', label: 'Na⁺  2,8', aria: 'Sodium ion 2,8, charge plus' }), 'Na⁺: 11 protons, 10 electrons')}${figure(shellSVG([2, 8, 8], { p: 17, n: 18, ion: '−', hiNew: true, label: 'Cl⁻  2,8,8', aria: 'Chloride ion 2,8,8 with the gained electron highlighted, charge minus' }), 'Cl⁻: 17 protons, 18 electrons')}</div>`) +
+  learn('Learn', 'Ions attract: an ionic lattice',
+    pts(['Opposite charges attract: Na⁺ and Cl⁻ pull on each other strongly.', 'This attraction is an <b>ionic bond</b>.', 'Each ion is surrounded by ions of the other charge, in a 3D <b>lattice</b> (a regular, repeating arrangement).',
+         '<b>There are no NaCl molecules.</b> The formula NaCl just gives the 1 : 1 ratio of ions.']) +
+    `<div class="figs">${figure(latticeSVG(), 'One layer of a sodium chloride lattice. The pattern repeats in every direction.')}</div>` + vidNote('What are ionic bonds?')) +
+  learn('Learn', 'Covalent bonding: sharing electrons',
+    pts(['Two non-metal atoms both need more electrons, and neither can take them.', 'So they share a pair of electrons: a <b>covalent bond</b>.', 'Atoms joined by covalent bonds make a <b>molecule</b>, such as H₂O, CO₂ and CH₄.', 'Metal + non-metal → ionic. Non-metal + non-metal → covalent.']) +
+    `<div class="twocol"><div><b>Ionic</b><br>metal + non-metal<br>electrons transferred<br>ions in a lattice<br>NaCl, MgO</div><div><b>Covalent</b><br>two non-metals<br>electrons shared<br>molecules<br>H₂O, CO₂</div></div>` +
+    vidNote('What are covalent bonds')) +
+  learn('Learn', 'Lewis diagrams show the valence electrons',
+    pts(['Only the valence (outer) electrons are drawn.', 'A line is a <b>bonding pair</b>: two shared electrons.', 'Two dots are a <b>lone pair</b>: two electrons that are not shared.',
+         'Each atom ends up with 8 electrons around it, except H, which has 2.', 'A double bond is 2 shared pairs (4 electrons); a triple bond is 3 shared pairs (6 electrons).']) +
+    `<div class="figs">${figure(lewisSVG('water'), 'Water, H₂O: 2 bonding pairs and 2 lone pairs on O')}</div>` +
+    vidNote('How to draw Lewis structures: five easy steps') +
+    we('Worked example', 'Drawing a Lewis diagram: ammonia, NH₃', 'Draw the Lewis diagram of ammonia, NH₃.', [
+      ['Valence electrons: N has 5, each H has 1: 5 + 3 = 8, so 4 pairs', 'count every valence electron first'],
+      ['N in the middle, bonded to each H: 3 bonding pairs', 'H only makes one bond'],
+      ['1 pair is left: a lone pair on N', '4 pairs − 3 bonding pairs'],
+      ['Check: N has 8 electrons around it; each H has 2', 'full outer shells']]) +
+    `<div class="figs">${figure(lewisSVG('ammonia'), 'Ammonia, NH₃: 3 bonding pairs and 1 lone pair on N')}</div>` +
+    `<div class="figs">${figure(lewisSVG('n2'), 'Nitrogen, N₂: a triple bond is 3 shared pairs, which is 6 electrons, not 3')}${figure(lewisSVG('co2'), 'Carbon dioxide, CO₂: two double bonds')}</div>` +
+    practice('How many bonds?', 'An atom usually makes (8 − valence electrons) bonds. H makes 1.', [
+      ['Carbon, C', '4 bonds (8 − 4)'], ['Nitrogen, N', '3 bonds (8 − 5)'], ['Oxygen, O', '2 bonds (8 − 6)'], ['Methane, CH₄: how many bonding pairs, and how many lone pairs on C?', '4 bonding pairs, 0 lone pairs']]) +
+    practice('Ionic or covalent?', 'Metal + non-metal → ionic. Two non-metals → covalent.', [
+      ['KBr', 'ionic'], ['CO₂', 'covalent'], ['MgO', 'ionic'], ['HCl', 'covalent'], ['CaCl₂', 'ionic'], ['NH₃', 'covalent']])),
+  checks: [
+    { q: 'What holds solid sodium chloride together?', a: 'Attraction between Na⁺ and Cl⁻ ions in all directions, in a lattice', w: ['A shared pair of electrons between each Na and Cl', 'A bond between one Na⁺ and one Cl⁻ in each NaCl molecule', 'Weak forces between NaCl molecules'],
+      e: 'Sodium chloride is ionic. Each ion attracts all the oppositely charged ions around it. There are no NaCl molecules.' },
+    { q: 'A student says: "The triple bond in N₂ is made of 3 electrons." What is correct?', a: 'A triple bond is 3 shared pairs, so 6 electrons', w: ['A triple bond is 3 electrons, one from each atom plus one extra', 'A triple bond is 3 lone pairs', 'A triple bond is 1 shared pair, used 3 times'],
+      e: 'Each bond (each line) is a pair of shared electrons. Three bonds = 3 pairs = 6 electrons.', d: () => lewisSVG('n2', { annotate: false }) },
+    { q: 'Which compound has covalent bonding?', a: 'NH₃', w: ['KBr', 'MgO', 'CaCl₂'],
+      e: 'N and H are both non-metals, so they share electrons. KBr, MgO and CaCl₂ each have a metal and a non-metal, so they are ionic.' }]
+},
+{ id: 'p7', chip: '7 Equations', title: 'Part 7 · Reactions and equations', sub: 'Reactants, products and balancing',
+  html: () =>
+  learn('Do now', 'Quick recall: no looking back',
+    practice('Quick recall', 'Answer from memory first.', [
+      ['The electron arrangement of magnesium?', '2,8,2'], ['The charge on an oxide ion?', '2− (O²⁻)'], ['The formula of sodium sulfate?', 'Na₂SO₄'], ['Is water, H₂O, ionic or covalent?', 'covalent (two non-metals)']])) +
+  learn('Learn', 'Reactants make products',
+    pts(['<b>Reactants</b> are what you start with; <b>products</b> are what is made.', 'The arrow means "react to make".', 'Atoms are rearranged, never made or destroyed: the same atoms are on both sides.', 'A word equation uses names; a symbol equation uses formulae.']) +
+    `<div class="eq">magnesium + oxygen → magnesium oxide<br>2Mg + O₂ → 2MgO</div><p class="muted center">reactants (left of the arrow) → products (right of the arrow)</p>`) +
+  learn('Learn', 'Counting atoms in a formula',
+    pts(['A subscript counts the atom just before it: H₂O has 2 H and 1 O.', 'A number in front (a <b>coefficient</b>) multiplies the whole formula: 3H₂O has 6 H and 3 O.', 'A subscript after a bracket multiplies everything inside: Ca(OH)₂ has 1 Ca, 2 O and 2 H.']) +
+    tbl(['Formula', 'Atoms'], [['H₂O', '2 H, 1 O'], ['2CO₂', '2 C, 4 O'], ['Ca(OH)₂', '1 Ca, 2 O, 2 H'], ['3H₂SO₄', '6 H, 3 S, 12 O']]) +
+    practice('Count the atoms', 'Count every atom of each element.', [
+      ['CH₄', '1 C, 4 H'], ['2NaOH', '2 Na, 2 O, 2 H'], ['Mg(NO₃)₂', '1 Mg, 2 N, 6 O'], ['3CaCO₃', '3 Ca, 3 C, 9 O'], ['2Al₂(SO₄)₃ (hint: brackets first, then the number in front)', '4 Al, 6 S, 24 O']])) +
+  learn('Learn', 'Balancing: the rules',
+    pts(['A balanced equation has the same number of each atom on both sides.', 'Balance by changing the numbers in front only.', '<b>Never change a subscript</b>: that makes a different substance.', 'Fix one element at a time, then count everything again.']) +
+    `<div class="twocol"><div><span class="good">✓ Number in front</span><br>H₂O → 2H₂O<br>still water, just more of it</div><div><span class="bad">✗ Change a subscript</span><br>H₂O → H₂O₂<br>now it is hydrogen peroxide!</div></div>` +
+    vidNote('Introduction to balancing chemical equations') +
+    we('Worked example', 'Balancing: hydrogen and oxygen', 'Balance: H₂ + O₂ → H₂O', [
+      ['Count: left 2 H, 2 O; right 2 H, 1 O', 'O does not balance'],
+      ['H₂ + O₂ → 2H₂O', '2 in front of H₂O: 2 O on each side'],
+      ['Count again: left 2 H, right 4 H', 'fixing O upset H'],
+      ['2H₂ + O₂ → 2H₂O', '2 in front of H₂: 4 H on each side'],
+      ['Check: 4 H and 2 O on each side ✓', 'balanced']]) +
+    yourTurn('Methane burning', 'Balance: CH₄ + O₂ → CO₂ + H₂O', [
+      ['Count: left 1 C, 4 H, 2 O; right 1 C, 2 H, 3 O', 'C balances; H and O do not'],
+      ['CH₄ + O₂ → CO₂ + 2H₂O', '2 in front of H₂O: 4 H on each side'],
+      ['Count O again: left 2, right 2 + 2 = 4', 'CO₂ has 2 O and 2H₂O has 2 O'],
+      ['CH₄ + 2O₂ → CO₂ + 2H₂O', '2 in front of O₂: 4 O on each side'],
+      ['Check: 1 C, 4 H and 4 O on each side ✓', 'balanced']]) +
+    practice('Balance these', 'Change only the numbers in front.', [
+      ['Mg + O₂ → MgO', '2Mg + O₂ → 2MgO'], ['N₂ + H₂ → NH₃', 'N₂ + 3H₂ → 2NH₃'], ['Zn + HCl → ZnCl₂ + H₂', 'Zn + 2HCl → ZnCl₂ + H₂'],
+      ['Al + O₂ → Al₂O₃ (hint: balance O first: 6 O on each side)', '4Al + 3O₂ → 2Al₂O₃'], ['C₃H₈ + O₂ → CO₂ + H₂O (hint: C first, then H, then O last)', 'C₃H₈ + 5O₂ → 3CO₂ + 4H₂O']])) +
+  learn('Learn', 'State symbols',
+    `<p>A state symbol after each formula says what state it is in.</p>` +
+    tbl(['Symbol', 'Meaning', 'Examples'], [['(s)', 'solid', 'Mg(s), CaCO₃(s)'], ['(l)', 'liquid', 'H₂O(l)'], ['(g)', 'gas', 'H₂(g), CO₂(g)'], ['(aq)', 'aqueous: dissolved in water', 'NaCl(aq)']]) +
+    `<div class="eq">Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)</div>` + vidNote('State symbols in chemical equations') +
+    we('Worked example', 'From words to a balanced symbol equation', 'calcium carbonate + hydrochloric acid → calcium chloride + water + carbon dioxide', [
+      ['Formulae: CaCO₃ + HCl → CaCl₂ + H₂O + CO₂', 'hydrochloric acid is HCl; Ca²⁺ and Cl⁻ give CaCl₂'],
+      ['Cl: 1 on the left, 2 on the right → 2HCl', 'change the number in front'],
+      ['Check: 1 Ca, 1 C, 3 O, 2 H, 2 Cl on each side ✓', 'everything balances'],
+      ['CaCO₃(s) + 2HCl(aq) → CaCl₂(aq) + H₂O(l) + CO₂(g)', 'add the states']]) +
+    practice('Write and balance', 'Write the formulae, balance, then add state symbols.', [
+      ['magnesium + hydrochloric acid → magnesium chloride + hydrogen', 'Mg(s) + 2HCl(aq) → MgCl₂(aq) + H₂(g)'],
+      ['sodium + water → sodium hydroxide + hydrogen (hint: hydrogen gas is H₂)', '2Na(s) + 2H₂O(l) → 2NaOH(aq) + H₂(g)'],
+      ['sodium hydroxide + sulfuric acid → sodium sulfate + water (hint: sulfuric acid is H₂SO₄)', '2NaOH(aq) + H₂SO₄(aq) → Na₂SO₄(aq) + 2H₂O(l)']])),
+  checks: [
+    { q: 'To balance Mg + O₂ → MgO, a student wrote Mg + O₂ → MgO₂. What is the correct balanced equation?', a: '2Mg + O₂ → 2MgO', w: ['Mg + O₂ → MgO₂', 'Mg + O → MgO', '2Mg + 2O₂ → 2MgO'],
+      e: 'Changing MgO to MgO₂ makes a different substance. Put numbers in front instead: 2 in front of MgO gives 2 O, then 2 in front of Mg.' },
+    { q: 'How many atoms are in Ca(OH)₂?', a: '1 Ca, 2 O, 2 H', w: ['1 Ca, 1 O, 2 H', '1 Ca, 1 O, 1 H', '2 Ca, 2 O, 2 H'],
+      e: 'The 2 after the bracket multiplies everything inside it: 2 × O and 2 × H. There is only 1 Ca.' },
+    { q: 'What does the state symbol (aq) mean?', a: 'Dissolved in water', w: ['A liquid', 'An acid', 'A gas'],
+      e: '(aq) means aqueous: dissolved in water, such as NaCl(aq). A pure liquid, such as water itself, is (l).' }]
+},
+{ id: 'ext', chip: 'Extension', title: 'Extension · How heavy is a formula?', sub: 'Molar mass: you will use it all through Level 2',
+  html: () =>
+  learn('Learn', 'Molar mass',
+    pts(['Each element\'s <b>relative atomic mass</b> is on the periodic table, for example C 12.0 and O 16.0.', 'Add them up for a formula to get its <b>molar mass</b>, M, in g mol⁻¹ (grams per mole).', 'Multiply by each subscript, and by any number after a bracket.']) +
+    `<div class="eq">M(CO₂) = 12.0 + 2 × 16.0 = 44.0 g mol⁻¹</div>` +
+    `<div class="twocol"><div>1 C: 12.0</div><div>2 O: 2 × 16.0 = 32.0</div></div>` + vidNote('Relative formula mass') +
+    we('Worked example', 'Molar mass with a bracket', 'Work out M(Ca(OH)₂). Use Ca 40.1, O 16.0, H 1.0.', [
+      ['Count the atoms: 1 Ca, 2 O, 2 H', 'the 2 after the bracket multiplies O and H'],
+      ['1 × 40.1 = 40.1', 'one calcium'],
+      ['2 × 16.0 = 32.0 and 2 × 1.0 = 2.0', 'two oxygens and two hydrogens'],
+      ['40.1 + 32.0 + 2.0 = 74.1 g mol⁻¹', 'add them up and give the unit']]) +
+    `<p class="data">Use: H 1.0 · C 12.0 · O 16.0 · Na 23.0 · Mg 24.3 · S 32.1 · Cl 35.5 · Ca 40.1</p>` +
+    practice('Work out the molar masses', 'Use the values above.', [
+      ['NaCl', '23.0 + 35.5 = 58.5 g mol⁻¹'], ['H₂O', '2 × 1.0 + 16.0 = 18.0 g mol⁻¹'], ['CaCO₃', '40.1 + 12.0 + 3 × 16.0 = 100.1 g mol⁻¹'],
+      ['Mg(OH)₂', '24.3 + 2 × 16.0 + 2 × 1.0 = 58.3 g mol⁻¹'], ['H₂SO₄', '2 × 1.0 + 32.1 + 4 × 16.0 = 98.1 g mol⁻¹']])),
+  checks: [
+    { q: 'What is the molar mass of H₂O? (H 1.0, O 16.0)', a: '18.0 g mol⁻¹', w: ['17.0 g mol⁻¹', '34.0 g mol⁻¹', '33.0 g mol⁻¹'],
+      e: 'There are 2 H and 1 O: 2 × 1.0 + 16.0 = 18.0 g mol⁻¹. 17.0 forgets the second H.' },
+    { q: 'What is the molar mass of CO₂? (C 12.0, O 16.0)', a: '44.0 g mol⁻¹', w: ['28.0 g mol⁻¹', '40.0 g mol⁻¹', '56.0 g mol⁻¹'],
+      e: '1 C and 2 O: 12.0 + 2 × 16.0 = 44.0 g mol⁻¹. 28.0 forgets to multiply O by its subscript.' }]
+}];
+/* ---------- Lab Escape: doors and question banks ----------
+   Each question: c = category label, q = question, a = correct answer, w = three wrong answers,
+   e = explanation, d = optional diagram, data = optional data line */
+const MM = 'Use: H 1.0 · C 12.0 · O 16.0 · Na 23.0 · Mg 24.3 · S 32.1 · Cl 35.5 · Ca 40.1';
+const DOORS = [
+{ name: 'Atom Vault', icon: '⚛️', part: 'Part 1 · Atomic anatomy', bank: [
+  { c: 'COUNT THE PARTICLES', q: 'A fluorine atom has atomic number 9 and mass number 19. How many neutrons does it have?', a: '10', w: ['9', '19', '28'], e: 'Neutrons = mass number − atomic number = 19 − 9 = 10.' },
+  { c: 'COUNT THE PARTICLES', q: 'A sodium atom has atomic number 11 and mass number 23. How many protons does it have?', a: '11', w: ['12', '23', '34'], e: 'The atomic number is the number of protons, so sodium has 11. The 23 counts protons and neutrons together.' },
+  { c: 'COUNT THE PARTICLES', q: 'A chlorine atom has atomic number 17 and mass number 35. How many neutrons does it have?', a: '18', w: ['17', '35', '52'], e: 'Neutrons = 35 − 17 = 18.' },
+  { c: 'COUNT THE PARTICLES', q: 'A neutral potassium atom has atomic number 19 and mass number 39. How many electrons does it have?', a: '19', w: ['20', '39', '58'], e: 'In a neutral atom, electrons = protons = atomic number = 19. 20 is the number of neutrons.' },
+  { c: 'COUNT THE PARTICLES', q: 'An atom has 20 protons and 20 neutrons. What is its mass number, and which element is it?', a: 'Mass number 40; calcium', w: ['Mass number 20; neon', 'Mass number 40; argon', 'Mass number 20; calcium'], e: 'Mass number = protons + neutrons = 40. The element is set by the protons: 20 protons is calcium.' },
+  { c: 'INSIDE THE ATOM', q: 'Which particle has a charge of −1 and almost no mass?', a: 'Electron', w: ['Proton', 'Neutron', 'Nucleus'], e: 'Electrons are negative (−1) and very light. Protons are +1 and neutrons have no charge; both have a mass of 1.' },
+  { c: 'INSIDE THE ATOM', q: 'Where are the protons and neutrons in an atom?', a: 'Both are in the nucleus', w: ['Both are in the shells', 'Protons in the nucleus; neutrons in the shells', 'Spread evenly through the whole atom'], e: 'The nucleus, in the centre, holds the protons and neutrons. Only electrons are in the shells.' },
+  { c: 'INSIDE THE ATOM', q: 'Why does the mass number count only protons and neutrons?', a: 'Electrons are too light to count', w: ['Electrons have no charge', 'Electrons are outside the atom', 'Electrons cancel out the protons'], e: 'Protons and neutrons each have a mass of 1. An electron\'s mass is almost 0, so it is left out.' },
+  { c: 'ELECTRON ARRANGEMENTS', q: 'Sulfur has atomic number 16. What is its electron arrangement?', a: '2,8,6', w: ['6,8,2', '2,8,8', '2,14'], e: 'Fill from the nucleus out: shell 1 takes 2, shell 2 takes 8, and the last 6 go in shell 3.' },
+  { c: 'ELECTRON ARRANGEMENTS', q: 'Potassium has atomic number 19. What is its electron arrangement?', a: '2,8,8,1', w: ['2,8,9', '2,9,8', '2,8,8,2'], e: 'Shell 3 holds up to 8 (up to calcium), so after 2,8,8 the last electron goes into shell 4.' },
+  { c: 'READ THE DIAGRAM', q: 'This shell diagram shows a neutral atom. Which element is it?', a: 'Aluminium', w: ['Boron', 'Lithium', 'Sodium'], d: () => shellSVG([2, 8, 3], { label: '? atom', aria: 'Shell diagram with 2, 8 and 3 electrons' }), e: 'Count the electrons: 2 + 8 + 3 = 13. A neutral atom with 13 electrons has 13 protons: aluminium.' },
+  { c: 'VALENCE ELECTRONS', q: 'Calcium is 2,8,8,2. How many valence electrons does it have?', a: '2', w: ['4', '20', '8'], e: 'Valence electrons are in the outer shell. Calcium\'s outer shell (shell 4) has 2.' },
+  { c: 'ELECTRON ARRANGEMENTS', q: 'Oxygen has atomic number 8. What is its electron arrangement?', a: '2,6', w: ['2,8', '8', '2,4,2'], e: '8 electrons: 2 fill shell 1, and the other 6 go in shell 2.' },
+  { c: 'READ THE DIAGRAM', q: 'How many valence electrons does this atom have?', a: '1', w: ['11', '3', '8'], d: () => shellSVG([2, 8, 1], { p: 11, n: 12, label: 'Na', aria: 'Shell diagram of sodium, 2,8,1' }), e: 'Only the outer shell counts. Sodium is 2,8,1, so it has 1 valence electron. 3 is the number of shells.' }
+]},
+{ name: 'Periodic Corridor', icon: '🗺️', part: 'Part 2 · The periodic table', bank: [
+  { c: 'GROUPS AND PERIODS', q: 'Chlorine is in period 3 and group 17. How many valence electrons does it have?', a: '7', w: ['3', '17', '8'], e: 'For groups 13 to 18, drop the 1: group 17 → 7 valence electrons. The period (3) gives the number of shells.' },
+  { c: 'GROUPS AND PERIODS', q: 'What does the period (row) tell you about an atom?', a: 'Its number of electron shells', w: ['Its number of valence electrons', 'Its number of protons', 'Whether it is a metal'], e: 'The period is the number of shells. The group gives the valence electrons.' },
+  { c: 'GROUPS AND PERIODS', q: 'For groups 1, 2 and 13 to 18, what does the group tell you?', a: 'The number of valence electrons', w: ['The number of shells', 'The number of neutrons', 'The mass number'], e: 'Groups 1 and 2 → 1 and 2 valence electrons; groups 13 to 18 → 3 to 8.' },
+  { c: 'READ THE TABLE', q: 'Phosphorus is in period 3, group 15. What is its electron arrangement?', a: '2,8,5', w: ['2,8,3', '2,5', '2,8,8,5'], e: 'Period 3 → 3 shells. Group 15 → 5 valence electrons. Inner shells are full: 2,8,5. Check: 2 + 8 + 5 = 15.' },
+  { c: 'METAL OR NON-METAL', q: 'Is magnesium a metal or a non-metal?', a: 'Metal: it is left of the staircase', w: ['Non-metal: it is right of the staircase', 'Non-metal: it is in period 3', 'Metal: it is in group 16'], e: 'Magnesium is in group 2, left of the staircase, so it is a metal.' },
+  { c: 'READ THE TABLE', q: 'Which element is in period 2, group 16?', a: 'Oxygen', w: ['Sulfur', 'Carbon', 'Nitrogen'], e: 'Row 2, the group 16 column, is oxygen (2,6). Sulfur is below it, in period 3.' },
+  { c: 'SPOT THE MISTAKE', q: '"Chlorine is in period 3, so it has 3 valence electrons." What is wrong?', a: 'The period gives shells; group 17 gives 7 valence electrons', w: ['Nothing: the period gives valence electrons', 'Chlorine is in period 7', 'Chlorine has 17 valence electrons'], e: 'This mixes up period and group. Chlorine has 3 shells and 7 valence electrons: 2,8,7.' },
+  { c: 'READ THE TABLE', q: 'Nitrogen has atomic number 7. Where is it on the table?', a: 'Period 2, group 15: 5 valence electrons', w: ['Period 5, group 2: 2 valence electrons', 'Period 2, group 15: 3 valence electrons', 'Period 15, group 2: 2 shells'], e: 'Nitrogen is 2,5: 2 shells (period 2) and 5 valence electrons (group 15).' },
+  { c: 'GROUPS AND PERIODS', q: 'Potassium is in period 4. How many electron shells does it have?', a: '4', w: ['1', '19', '2'], e: 'The period gives the number of shells. Potassium is 2,8,8,1: 4 shells.' },
+  { c: 'METAL OR NON-METAL', q: 'Sulfur is in group 16. Which describes it?', a: 'Non-metal with 6 valence electrons', w: ['Metal with 6 valence electrons', 'Non-metal with 3 valence electrons', 'Metal with 16 valence electrons'], e: 'Group 16 → 6 valence electrons. Sulfur is right of the staircase, so it is a non-metal.' },
+  { c: 'GROUPS AND PERIODS', q: 'Fluorine is in period 2, group 17. How many electron shells does it have?', a: '2', w: ['7', '9', '17'], e: 'Period 2 → 2 shells. Fluorine is 2,7.' },
+  { c: 'READ THE TABLE', q: 'How many valence electrons does the highlighted element have?', a: '3', w: ['13', '5', '1'], d: () => ptableSVG({ highlight: 'Al', hideHighlightSym: true, aria: 'Periodic table with the element in period 3, group 13 highlighted' }), e: 'The highlighted element is in group 13 → 3 valence electrons. It is aluminium, 2,8,3.' },
+  { c: 'NOBLE GASES', q: 'Helium is in group 18. How many electrons fill its outer shell?', a: '2', w: ['8', '18', '4'], e: 'Helium has only shell 1, which is full with 2. The other noble gases have 8 in their outer shell.' }
+]},
+{ name: 'Stability Lab', icon: '🛡️', part: 'Part 3 · The drive for stability', bank: [
+  { c: 'THE OCTET RULE', q: 'What does the octet rule say?', a: 'Atoms react to get a full outer shell, usually of 8 electrons', w: ['Every atom has 8 shells', 'Every atom needs 8 protons', 'Every atom already has 8 valence electrons'], e: 'Atoms lose, gain or share electrons to reach a full outer shell, usually 8. "Octet" means a set of eight.' },
+  { c: 'LOSE OR GAIN', q: 'Sodium is 2,8,1. What is the easiest way for it to get a full outer shell?', a: 'Lose 1 electron', w: ['Gain 7 electrons', 'Gain 1 electron', 'Lose 2 electrons'], e: 'Losing 1 is far easier than gaining 7. Sodium becomes Na⁺, 2,8, like neon.' },
+  { c: 'LOSE OR GAIN', q: 'Chlorine is 2,8,7. Which ion forms most easily?', a: 'Cl⁻, by gaining 1 electron', w: ['Cl⁷⁺, by losing 7 electrons', 'Cl⁺, by losing 1 electron', 'Cl⁷⁻, by gaining 7 electrons'], e: 'Gaining 1 is the shorter way. One extra electron gives a 1− charge: Cl⁻, 2,8,8.' },
+  { c: 'PREDICT THE ION', q: 'Magnesium is 2,8,2. Which ion forms, and what is its arrangement?', a: 'Mg²⁺, 2,8', w: ['Mg⁶⁻, 2,8,8', 'Mg²⁻, 2,8', 'Mg²⁺, 2,8,2'], e: 'Magnesium loses its 2 outer electrons. It now has 2 more protons than electrons, so it is Mg²⁺, with arrangement 2,8.' },
+  { c: 'FULL SHELLS', q: 'Na⁺ has the same electron arrangement as which noble gas?', a: 'Neon, 2,8', w: ['Argon, 2,8,8', 'Helium, 2', 'None: Na⁺ is still 2,8,1'], e: 'Sodium loses its outer electron: 2,8,1 → 2,8. That matches neon.' },
+  { c: 'FULL SHELLS', q: 'Which group of elements hardly reacts?', a: 'Group 18, the noble gases', w: ['Group 1', 'Group 17', 'Group 2'], e: 'Group 18 atoms already have full outer shells, so they have no need to lose, gain or share electrons.' },
+  { c: 'LOSE OR GAIN', q: 'Metals have 1 to 3 valence electrons. What do they usually do?', a: 'Lose electrons to form positive ions', w: ['Gain electrons to form negative ions', 'Gain electrons to form positive ions', 'Keep their electrons and never react'], e: 'Losing 1 to 3 electrons is easier than gaining 5 to 7. Losing negative electrons leaves a positive ion.' },
+  { c: 'LOSE OR GAIN', q: 'Non-metals have 5 to 7 valence electrons. When they react with a metal, what do they do?', a: 'Gain electrons to form negative ions', w: ['Lose electrons to form positive ions', 'Lose electrons to form negative ions', 'Gain protons to form positive ions'], e: 'Gaining 1 to 3 electrons fills the outer shell. Extra electrons make the ion negative.' },
+  { c: 'SHARE', q: 'Two non-metal atoms react together. How do they get full outer shells?', a: 'They share electrons in covalent bonds', w: ['One gives electrons to the other to form ions', 'They both lose electrons to become cations', 'They gain protons from each other'], e: 'Both non-metals need more electrons and neither can take them, so they share pairs of electrons.' },
+  { c: 'PREDICT THE ION', q: 'Oxygen is 2,6. What is the easiest way for it to get a full outer shell?', a: 'Gain 2 electrons to become O²⁻', w: ['Lose 6 electrons to become O⁶⁺', 'Gain 6 electrons to become O⁶⁻', 'Lose 2 electrons to become O²⁺'], e: 'Gaining 2 is easier than losing 6. Two extra electrons give O²⁻, 2,8.' },
+  { c: 'PREDICT THE ION', q: 'Aluminium is 2,8,3. Which ion forms, and what is its arrangement?', a: 'Al³⁺, 2,8', w: ['Al⁵⁻, 2,8,8', 'Al³⁻, 2,8', 'Al³⁺, 2,8,3'], e: 'Aluminium loses its 3 outer electrons, leaving 2,8. Three more protons than electrons gives Al³⁺.' },
+  { c: 'FULL SHELLS', q: 'What is the electron arrangement of the chloride ion, Cl⁻?', a: '2,8,8, like argon', w: ['2,8,7, like chlorine', '2,8,6', '2,8, like neon'], e: 'Chlorine (2,8,7) gains 1 electron, so its outer shell fills: 2,8,8. That matches argon.' }
+]},
+{ name: 'Ion Chamber', icon: '⚡', part: 'Part 4 · Ions', bank: [
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the sulfate ion?', a: 'SO₄²⁻', w: ['S²⁻', 'SO₄⁻', 'SO₃²⁻'], e: 'Sulfate is SO₄²⁻. S²⁻ is sulfide, a single sulfur atom with a 2− charge.' },
+  { c: 'CATIONS AND ANIONS', q: 'What is a cation?', a: 'A positive ion, formed when an atom loses electrons', w: ['A negative ion, formed when an atom gains electrons', 'A positive ion, formed when an atom gains electrons', 'A neutral atom'], e: 'Losing electrons leaves more protons than electrons, so the ion is positive. Metals form cations.' },
+  { c: 'ION CHARGES', q: 'Calcium is in group 2 and period 4. Which ion does it form?', a: 'Ca²⁺', w: ['Ca²⁻', 'Ca⁺', 'Ca⁴⁺'], e: 'The group, not the period, sets the charge. Group 2 metals lose 2 electrons: Ca²⁺.' },
+  { c: 'ION CHARGES', q: 'Nitrogen is in group 15. Which ion does it form, and what is it called?', a: 'N³⁻, nitride', w: ['N⁵⁺, nitrogen ion', 'N³⁺, nitride', 'NO₃⁻, nitrate'], e: 'Nitrogen gains 3 electrons (easier than losing 5): N³⁻. A simple anion ends in -ide: nitride. Nitrate is a polyatomic ion.' },
+  { c: 'NAME THE ION', q: 'What is the name of O²⁻?', a: 'Oxide', w: ['Oxygen', 'Oxate', 'Hydroxide'], e: 'A simple anion takes the -ide ending: oxygen → oxide. Hydroxide is OH⁻.' },
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the nitrate ion?', a: 'NO₃⁻', w: ['N³⁻', 'NO₃²⁻', 'NH₄⁺'], e: 'Nitrate is NO₃⁻. N³⁻ is nitride and NH₄⁺ is ammonium.' },
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the ammonium ion?', a: 'NH₄⁺', w: ['NH₃', 'NH₄⁻', 'NO₃⁻'], e: 'Ammonium is NH₄⁺, one of the few positive polyatomic ions. NH₃ is ammonia, a molecule with no charge.' },
+  { c: 'TRANSITION METALS', q: 'Which is the iron(III) ion?', a: 'Fe³⁺', w: ['Fe³⁻', 'Fe²⁺', 'Fe₃'], e: 'The Roman numeral gives the charge: iron(III) is Fe³⁺. Metal ions are always positive.' },
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the carbonate ion?', a: 'CO₃²⁻', w: ['CO₂', 'CO₃⁻', 'HCO₃⁻'], e: 'Carbonate is CO₃²⁻. HCO₃⁻ is hydrogen carbonate, and CO₂ is carbon dioxide, a molecule.' },
+  { c: 'CATIONS AND ANIONS', q: 'How does an anion compare with its atom?', a: 'It has more electrons than protons', w: ['It has more protons than electrons', 'It has more neutrons than protons', 'It has lost all its electrons'], e: 'An anion forms when a non-metal gains electrons, so it has more electrons (−) than protons (+).' },
+  { c: 'POLYATOMIC IONS', q: 'What is a polyatomic ion?', a: 'A group of bonded atoms with an overall charge', w: ['Any ion with a charge bigger than 1', 'A metal that can form more than one ion', 'A group of atoms with no charge'], e: 'Examples are OH⁻, NO₃⁻ and SO₄²⁻. The group stays together as one unit in reactions.' },
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the hydroxide ion?', a: 'OH⁻', w: ['OH⁺', 'H₂O', 'O²⁻'], e: 'Hydroxide is OH⁻. H₂O is water and O²⁻ is oxide.' },
+  { c: 'NAME THE ION', q: 'Fluorine is in group 17. Which ion forms, and what is it called?', a: 'F⁻, fluoride', w: ['F⁷⁺, fluorine ion', 'F⁺, fluoride', 'F⁻, fluorine'], e: 'Fluorine gains 1 electron: F⁻. Its name changes to end in -ide: fluoride.' },
+  { c: 'POLYATOMIC IONS', q: 'Which is the formula of the phosphate ion?', a: 'PO₄³⁻', w: ['P³⁻', 'PO₄²⁻', 'PO₃³⁻'], e: 'Phosphate is PO₄³⁻. You need to learn polyatomic ions; you cannot read them off the table.' }
+]},
+{ name: 'Formula Workshop', icon: '🔧', part: 'Part 5 · Writing ionic formulae', bank: [
+  { c: 'SWAP AND DROP', q: 'What is the formula of aluminium oxide?', a: 'Al₂O₃', w: ['Al₃O₂', 'AlO', 'AlO₃'], e: 'Al³⁺ and O²⁻. Swap and drop: Al takes O\'s 2 and O takes Al\'s 3. Check: +6 and −6 cancel.' },
+  { c: 'CANCEL DOWN', q: 'What is the formula of magnesium oxide?', a: 'MgO', w: ['Mg₂O₂', 'MgO₂', 'Mg₂O'], e: 'Mg²⁺ and O²⁻. Swap gives Mg₂O₂, which cancels down to the simplest ratio: MgO.' },
+  { c: 'BRACKETS', q: 'What is the formula of calcium nitrate?', a: 'Ca(NO₃)₂', w: ['CaNO₃₂', 'CaNO₃', 'Ca₂NO₃'], e: 'Ca²⁺ needs two NO₃⁻. Brackets keep each nitrate together. CaNO₃₂ would read as 32 oxygens.' },
+  { c: 'SWAP AND DROP', q: 'What is the formula of calcium chloride?', a: 'CaCl₂', w: ['CaCl', 'Ca₂Cl', 'Ca₂Cl₂'], e: 'Ca²⁺ and Cl⁻. One Ca²⁺ needs two Cl⁻: (+2) + 2 × (−1) = 0.' },
+  { c: 'SWAP AND DROP', q: 'What is the formula of sodium oxide?', a: 'Na₂O', w: ['NaO', 'NaO₂', 'Na₂O₂'], e: 'Na⁺ and O²⁻. Two Na⁺ cancel one O²⁻: 2 × (+1) + (−2) = 0.' },
+  { c: 'BRACKETS', q: 'What is the formula of aluminium sulfate?', a: 'Al₂(SO₄)₃', w: ['Al₂SO₄₃', 'Al₃(SO₄)₂', 'AlSO₄'], e: 'Al³⁺ and SO₄²⁻. Swap and drop gives 2 Al and 3 sulfates. Brackets go round the sulfate because there is more than one.' },
+  { c: 'BRACKETS', q: 'What is the formula of calcium hydroxide?', a: 'Ca(OH)₂', w: ['CaOH₂', 'CaOH', 'Ca(OH)₃'], e: 'Ca²⁺ needs two OH⁻. Without brackets, CaOH₂ would mean only the H is doubled.' },
+  { c: 'NAME IT', q: 'What is the name of MgCl₂?', a: 'Magnesium chloride', w: ['Magnesium dichloride', 'Magnesium chlorine', 'Chloride magnesium'], e: 'Metal first, unchanged; then the non-metal with -ide. Ionic names never use di- or tri-.' },
+  { c: 'NAME IT', q: 'What is the name of FeCl₃?', a: 'Iron(III) chloride', w: ['Iron trichloride', 'Iron(I) chloride', 'Iron(II) chloride'], e: 'Three Cl⁻ give 3−, so iron must be Fe³⁺: iron(III). The Roman numeral is the charge.' },
+  { c: 'NAME IT', q: 'What is the name of K₂SO₄?', a: 'Potassium sulfate', w: ['Potassium sulfide', 'Dipotassium sulfate', 'Potassium sulfur oxide'], e: 'SO₄²⁻ is a polyatomic ion, so it keeps its name: sulfate. Sulfide is S²⁻.' },
+  { c: 'NAME IT', q: 'What is the name of FeO?', a: 'Iron(II) oxide', w: ['Iron(I) oxide', 'Iron(III) oxide', 'Iron oxygen'], e: 'Oxide is O²⁻. One iron cancels it, so iron is Fe²⁺: iron(II) oxide.' },
+  { c: 'SWAP AND DROP', q: 'What is the formula of ammonium nitrate?', a: 'NH₄NO₃', w: ['(NH₄)₂NO₃', 'NH₄(NO₃)₂', 'N₂H₄O₃'], e: 'NH₄⁺ and NO₃⁻ have equal and opposite charges, so one of each. No brackets are needed.' },
+  { c: 'NO OVERALL CHARGE', q: 'Why does MgCl₂ have two chloride ions?', a: 'Two Cl⁻ are needed to cancel the 2+ charge on Mg²⁺', w: ['Chlorine always comes in pairs', 'Magnesium has 2 shells', 'Chlorine is in period 2'], e: 'Ionic compounds have no overall charge: (+2) + 2 × (−1) = 0.' },
+  { c: 'NAME IT', q: 'What is the name of Cu(NO₃)₂?', a: 'Copper(II) nitrate', w: ['Copper nitride', 'Copper(I) nitrate', 'Copper dinitrate'], e: 'Two NO₃⁻ give 2−, so copper is Cu²⁺: copper(II). Nitrate keeps its name.' }
+]},
+{ name: 'Bonding Bay', icon: '🔗', part: 'Part 6 · Ionic and covalent bonding', bank: [
+  { c: 'IONIC LATTICES', q: 'What holds solid sodium chloride together?', a: 'Attraction between Na⁺ and Cl⁻ ions in all directions, in a lattice', w: ['A shared pair of electrons between each Na and Cl', 'A bond inside each NaCl molecule', 'Weak forces between NaCl molecules'], e: 'NaCl is ionic. Each ion is surrounded by oppositely charged ions. There are no NaCl molecules.' },
+  { c: 'COUNT THE ELECTRONS', q: 'How many electrons are in the triple bond of N₂?', a: '6', w: ['3', '2', '9'], d: () => lewisSVG('n2', { annotate: false }), e: 'Each line is a shared pair. Three lines = 3 pairs = 6 electrons.' },
+  { c: 'IONIC OR COVALENT', q: 'What type of bonding is in KBr?', a: 'Ionic: a metal and a non-metal', w: ['Covalent: two non-metals', 'Covalent: a metal and a non-metal', 'Ionic: two non-metals'], e: 'K is a metal and Br is a non-metal. Electrons transfer, so KBr is ionic.' },
+  { c: 'IONIC OR COVALENT', q: 'What type of bonding is in NH₃?', a: 'Covalent: two non-metals', w: ['Ionic: a metal and a non-metal', 'Ionic: two non-metals', 'Covalent: a metal and a non-metal'], e: 'N and H are both non-metals, so they share electrons.' },
+  { c: 'LEWIS DIAGRAMS', q: 'In a Lewis diagram, what does a line between two atoms show?', a: 'A bonding pair: two shared electrons', w: ['One shared electron', 'A lone pair', 'A transferred electron'], e: 'A line is one covalent bond: a pair of shared electrons.' },
+  { c: 'LEWIS DIAGRAMS', q: 'How many lone pairs are on nitrogen in this ammonia diagram?', a: '1', w: ['0', '3', '4'], d: () => lewisSVG('ammonia', { annotate: false }), e: 'N has 5 valence electrons. It uses 3 in bonds, leaving 2: one lone pair.' },
+  { c: 'LEWIS DIAGRAMS', q: 'How many lone pairs are on oxygen in this water diagram?', a: '2', w: ['0', '1', '4'], d: () => lewisSVG('water', { annotate: false }), e: 'O has 6 valence electrons. It uses 2 in bonds, leaving 4: two lone pairs.' },
+  { c: 'BOND COUNT', q: 'How many covalent bonds does a carbon atom usually make?', a: '4', w: ['2', '6', '8'], e: 'Bonds = 8 − valence electrons = 8 − 4 = 4.' },
+  { c: 'BOND COUNT', q: 'How many covalent bonds does an oxygen atom usually make?', a: '2', w: ['6', '1', '4'], e: 'Bonds = 8 − 6 = 2. That is why water is H–O–H.' },
+  { c: 'IONIC LATTICES', q: 'What does the formula NaCl tell you?', a: 'The ions are in a 1 : 1 ratio in the lattice', w: ['One Na atom shares electrons with one Cl atom', 'Each NaCl molecule has one bond', 'Sodium and chlorine are both non-metals'], e: 'An ionic formula is a ratio. NaCl means 1 Na⁺ for every 1 Cl⁻ across the whole lattice.' },
+  { c: 'ELECTRON TRANSFER', q: 'What happens when sodium and chlorine react?', a: 'Sodium transfers one electron to chlorine', w: ['Chlorine transfers one electron to sodium', 'They share a pair of electrons', 'Sodium transfers seven electrons to chlorine'], e: 'Sodium (2,8,1) loses 1 to become Na⁺; chlorine (2,8,7) gains it to become Cl⁻.' },
+  { c: 'LEWIS DIAGRAMS', q: 'Methane is CH₄. How many bonding pairs and lone pairs are around carbon?', a: '4 bonding pairs, 0 lone pairs', w: ['4 bonding pairs, 4 lone pairs', '1 bonding pair, 3 lone pairs', '8 bonding pairs, 0 lone pairs'], d: () => lewisSVG('methane'), e: 'Carbon has 4 valence electrons and bonds to 4 H. That gives 8 electrons round C, all in bonds.' },
+  { c: 'IONIC OR COVALENT', q: 'Which of these is a covalent compound?', a: 'CO₂', w: ['MgO', 'CaCl₂', 'KBr'], e: 'C and O are both non-metals. The others each have a metal, so they are ionic.' },
+  { c: 'LEWIS DIAGRAMS', q: 'How many electrons surround a hydrogen atom in a molecule?', a: '2', w: ['8', '1', '0'], e: 'Hydrogen only has shell 1, which is full with 2. It makes one bond.' },
+  { c: 'COUNT THE ELECTRONS', q: 'How many electrons are in one double bond?', a: '4', w: ['2', '1', '8'], d: () => lewisSVG('co2', { annotate: false }), e: 'A double bond is 2 shared pairs: 2 × 2 = 4 electrons.' }
+]},
+{ name: 'Reaction Room', icon: '🔥', part: 'Part 7 · Reactions and equations', bank: [
+  { c: 'COUNT THE ATOMS', q: 'How many atoms of each element are in Ca(OH)₂?', a: '1 Ca, 2 O, 2 H', w: ['1 Ca, 1 O, 2 H', '1 Ca, 1 O, 1 H', '2 Ca, 2 O, 2 H'], e: 'The 2 after the bracket doubles everything inside it. There is only 1 Ca.' },
+  { c: 'COUNT THE ATOMS', q: 'How many atoms of each element are in 2CO₂?', a: '2 C, 4 O', w: ['2 C, 2 O', '1 C, 4 O', '1 C, 2 O'], e: 'The 2 in front multiplies the whole formula: 2 × (1 C + 2 O) = 2 C and 4 O.' },
+  { c: 'COUNT THE ATOMS', q: 'How many oxygen atoms are in 3H₂SO₄?', a: '12', w: ['4', '7', '3'], e: 'Each H₂SO₄ has 4 O. The 3 in front gives 3 × 4 = 12.' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation for magnesium burning?', a: '2Mg + O₂ → 2MgO', w: ['Mg + O₂ → MgO₂', 'Mg + O → MgO', '2Mg + 2O₂ → 2MgO'], e: 'Do not change MgO to MgO₂. Put 2 in front of MgO (2 O), then 2 in front of Mg.' },
+  { c: 'BALANCING RULES', q: 'Why must you never change a subscript when balancing?', a: 'It makes a different substance', w: ['It makes the equation too long', 'Subscripts are always 1', 'It changes the state symbol'], e: 'H₂O → H₂O₂ turns water into hydrogen peroxide. Change the numbers in front instead.' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation: H₂ + O₂ → H₂O?', a: '2H₂ + O₂ → 2H₂O', w: ['H₂ + O₂ → H₂O₂', 'H₂ + O₂ → 2H₂O', '2H₂ + 2O₂ → 2H₂O'], e: '2H₂O fixes O (2 each side). Then 2H₂ fixes H (4 each side).' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation for methane burning?', a: 'CH₄ + 2O₂ → CO₂ + 2H₂O', w: ['CH₄ + O₂ → CO₂ + H₂O', 'CH₄ + 3O₂ → CO₂ + 2H₂O', 'CH₄ + 2O₂ → CO₂ + H₄O₂'], e: 'Each side has 1 C, 4 H and 4 O. Changing H₂O to H₄O₂ would alter a subscript, which is not allowed.' },
+  { c: 'STATE SYMBOLS', q: 'What does (aq) mean in an equation?', a: 'Dissolved in water', w: ['A liquid', 'An acid', 'A gas'], e: '(aq) means aqueous: dissolved in water, as in NaCl(aq). Pure liquids use (l).' },
+  { c: 'STATE SYMBOLS', q: 'Which state symbol should go after hydrogen gas, H₂?', a: '(g)', w: ['(l)', '(aq)', '(s)'], e: 'Hydrogen is a gas, so it is H₂(g).' },
+  { c: 'REACTANTS AND PRODUCTS', q: 'In an equation, what are the reactants?', a: 'The substances you start with, left of the arrow', w: ['The substances made, right of the arrow', 'Only the gases in the reaction', 'The numbers in front of each formula'], e: 'Reactants → products. The arrow means "react to make".' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation: N₂ + H₂ → NH₃?', a: 'N₂ + 3H₂ → 2NH₃', w: ['N₂ + H₂ → 2NH₃', 'N₂ + 3H₂ → NH₃', 'N + H₃ → NH₃'], e: '2NH₃ gives 2 N and 6 H. 3H₂ gives 6 H. Each side has 2 N and 6 H.' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation: Zn + HCl → ZnCl₂ + H₂?', a: 'Zn + 2HCl → ZnCl₂ + H₂', w: ['Zn + HCl₂ → ZnCl₂ + H₂', 'Zn + HCl → ZnCl + H', '2Zn + 2HCl → ZnCl₂ + H₂'], e: 'ZnCl₂ has 2 Cl and H₂ has 2 H, so you need 2HCl. HCl₂ would change a subscript.' },
+  { c: 'COUNT THE ATOMS', q: 'How many oxygen atoms are in Mg(NO₃)₂?', a: '6', w: ['3', '5', '2'], e: 'Each NO₃ has 3 O. The 2 after the bracket gives 2 × 3 = 6.' },
+  { c: 'REACTANTS AND PRODUCTS', q: 'What happens to atoms in a chemical reaction?', a: 'They are rearranged, never made or destroyed', w: ['Some are destroyed', 'New atoms are made', 'They change into different elements'], e: 'The same atoms appear on both sides. That is why equations must balance.' },
+  { c: 'BALANCE IT', q: 'Which is the balanced equation: Al + O₂ → Al₂O₃?', a: '4Al + 3O₂ → 2Al₂O₃', w: ['2Al + 3O₂ → Al₂O₃', '4Al + 3O₂ → Al₂O₃', 'Al + O₂ → AlO₂'], e: 'Balance O first: 3O₂ and 2Al₂O₃ both give 6 O. Then 2Al₂O₃ has 4 Al, so 4Al.' }
+]},
+{ name: 'Molar Mass Vault', icon: '⚖️', bonus: true, part: 'Extension · Molar mass', bank: [
+  { c: 'MOLAR MASS', q: 'What is the molar mass of CO₂?', a: '44.0 g mol⁻¹', w: ['28.0 g mol⁻¹', '40.0 g mol⁻¹', '30.0 g mol⁻¹'], data: MM, e: '12.0 + 2 × 16.0 = 44.0. The subscript 2 multiplies the oxygen.' },
+  { c: 'MOLAR MASS', q: 'What is the molar mass of NaCl?', a: '58.5 g mol⁻¹', w: ['35.5 g mol⁻¹', '23.0 g mol⁻¹', '12.5 g mol⁻¹'], data: MM, e: 'Add the two: 23.0 + 35.5 = 58.5.' },
+  { c: 'MULTIPLY THE SUBSCRIPTS', q: 'What is the molar mass of H₂O?', a: '18.0 g mol⁻¹', w: ['17.0 g mol⁻¹', '34.0 g mol⁻¹', '33.0 g mol⁻¹'], data: MM, e: '2 × 1.0 + 16.0 = 18.0. 17.0 forgets the second hydrogen.' },
+  { c: 'MULTIPLY THE SUBSCRIPTS', q: 'What is the molar mass of CaCO₃?', a: '100.1 g mol⁻¹', w: ['68.1 g mol⁻¹', '52.1 g mol⁻¹', '116.1 g mol⁻¹'], data: MM, e: '40.1 + 12.0 + 3 × 16.0 = 100.1.' },
+  { c: 'BRACKETS FIRST', q: 'What is the molar mass of Mg(OH)₂?', a: '58.3 g mol⁻¹', w: ['41.3 g mol⁻¹', '57.3 g mol⁻¹', '75.3 g mol⁻¹'], data: MM, e: '24.3 + 2 × (16.0 + 1.0) = 58.3. The bracket doubles both O and H.' },
+  { c: 'MULTIPLY THE SUBSCRIPTS', q: 'What is the molar mass of H₂SO₄?', a: '98.1 g mol⁻¹', w: ['97.1 g mol⁻¹', '50.1 g mol⁻¹', '82.1 g mol⁻¹'], data: MM, e: '2 × 1.0 + 32.1 + 4 × 16.0 = 98.1.' },
+  { c: 'UNITS', q: 'What is the unit of molar mass?', a: 'g mol⁻¹', w: ['g', 'mol', 'mol g⁻¹'], e: 'Molar mass is grams per mole: g mol⁻¹.' },
+  { c: 'WHERE TO LOOK', q: 'Where do you find an element\'s relative atomic mass?', a: 'On the periodic table', w: ['It is the same as the atomic number', 'Count the valence electrons', 'Add up the protons only'], e: 'Each element\'s relative atomic mass is given on the periodic table, for example C 12.0.' },
+  { c: 'MOLAR MASS', q: 'What is the molar mass of O₂?', a: '32.0 g mol⁻¹', w: ['16.0 g mol⁻¹', '8.0 g mol⁻¹', '18.0 g mol⁻¹'], data: MM, e: 'Oxygen gas has 2 O atoms: 2 × 16.0 = 32.0.' },
+  { c: 'MOLAR MASS', q: 'What is the molar mass of MgO?', a: '40.3 g mol⁻¹', w: ['24.3 g mol⁻¹', '56.3 g mol⁻¹', '8.3 g mol⁻¹'], data: MM, e: '24.3 + 16.0 = 40.3.' },
+  { c: 'MULTIPLY THE SUBSCRIPTS', q: 'What is the molar mass of CaCl₂?', a: '111.1 g mol⁻¹', w: ['75.6 g mol⁻¹', '151.2 g mol⁻¹', '95.6 g mol⁻¹'], data: MM, e: '40.1 + 2 × 35.5 = 111.1. 75.6 forgets the second chlorine.' },
+  { c: 'BRACKETS FIRST', q: 'In Mg(OH)₂, what does the 2 after the bracket multiply?', a: 'Both the O and the H', w: ['Only the H', 'Only the Mg', 'Everything, including Mg'], e: 'A number after a bracket multiplies everything inside the bracket, and nothing outside it.' }
+]}];
+/* ---------- Videos ---------- */
+const VIDEOS = [
+  { part: 'Part 1 · Atomic anatomy', items: [
+    ['Parts of an atom', 'FuseSchool', '2:24', 'cpBb2bgFO6I', 'where each particle sits, and the charge and mass of each one.'],
+    ['Atomic number and mass number', 'FuseSchool', '3:23', '_S7ov25y3_M', 'how to get the number of neutrons by taking the atomic number away from the mass number.'],
+    ['Electron configuration diagrams', 'FuseSchool', '4:59', 'hSkJzE2Vz_w', 'the order the shells fill in, and how many electrons each shell holds.']]},
+  { part: 'Part 2 · The periodic table', items: [
+    ['What are periods and groups in the periodic table?', 'FuseSchool', '3:04', '7mLPC74GHMo', 'how the group links to valence electrons and the period links to the number of shells.']]},
+  { part: 'Part 3 · The drive for stability', none: true },
+  { part: 'Part 4 · Ions', items: [
+    ['What are ions', 'FuseSchool', '4:45', '900dXBWgx3Y', 'why losing electrons makes a positive ion and gaining electrons makes a negative ion.'],
+    ['What\'s a polyatomic ion?', 'Tyler DeWitt', '5:15', 'MJZeZvDxcx8', 'how a group of atoms can share one overall charge and stay together as a unit.']]},
+  { part: 'Part 5 · Writing ionic formulae', items: [
+    ['Writing ionic formulas: introduction', 'Tyler DeWitt', '11:44', 'URc75hoKGLY', 'how the charges must cancel to zero, and when brackets are needed.'],
+    ['Formulae of ionic compounds and their names, part 1', 'FuseSchool', '3:23', 'vfYnhnfdsD0', 'how the name of the negative ion changes to end in -ide.']]},
+  { part: 'Part 6 · Ionic and covalent bonding', items: [
+    ['What are ionic bonds?', 'FuseSchool', '2:55', 'zpaHPXVR8WU', 'the electron moving from the metal to the non-metal, and the ions attracting each other.'],
+    ['What are covalent bonds', 'FuseSchool', '5:53', 'h24UmH38_LI', 'how two non-metals share a pair of electrons so both get a full outer shell.'],
+    ['How to draw Lewis structures: five easy steps', 'Wayne Breslyn', '5:57', '1ZlnzyHahvo', 'counting the valence electrons first, then placing bonding pairs before lone pairs.']]},
+  { part: 'Part 7 · Reactions and equations', items: [
+    ['Introduction to balancing chemical equations', 'Tyler DeWitt', '12:23', 'yA3TZJ2em6g', 'why you change only the numbers in front and never the subscripts.'],
+    ['State symbols in chemical equations', 'FuseSchool', '3:37', 'rb4cs9Xlso0', 'the difference between (l) for a liquid and (aq) for something dissolved in water.']]},
+  { part: 'Extension · Molar mass', items: [
+    ['Relative formula mass', 'Freesciencelessons', '4:09', 'q49NwIrjaFw', 'how each subscript, and any number after a bracket, multiplies the atomic mass.']]}
+];
+
+/* ---------- Utilities ---------- */
+const $ = s => document.querySelector(s);
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function say(t) { const l = $('#live'); l.textContent = ''; setTimeout(() => l.textContent = t, 30); }
+function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;'); }
+
+/* ---------- Sound (off by default) ---------- */
+let soundOn = false, actx = null;
+function beep(type) {
+  if (!soundOn) return;
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    const notes = type === 'good' ? [523, 784] : type === 'door' ? [523, 659, 784, 1047] : type === 'bad' ? [220, 180] : [440];
+    notes.forEach((f, i) => {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type === 'bad' ? 'triangle' : 'sine'; o.frequency.value = f;
+      const t = actx.currentTime + i * 0.12;
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.18, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.2);
+    });
+  } catch (e) { /* audio not available */ }
+}
+$('#soundBtn').addEventListener('click', e => {
+  soundOn = !soundOn;
+  e.currentTarget.setAttribute('aria-pressed', soundOn);
+  e.currentTarget.textContent = soundOn ? '🔊 Sound on' : '🔇 Sound off';
+  if (soundOn) beep('tick');
+});
+
+/* ---------- Tabs ---------- */
+const TABS = ['read', 'watch', 'quiz'];
+function showTab(name, focus) {
+  TABS.forEach(t => {
+    const on = t === name;
+    $('#tab-' + t).setAttribute('aria-selected', on);
+    $('#tab-' + t).tabIndex = on ? 0 : -1;
+    $('#panel-' + t).hidden = !on;
+  });
+  if (focus) $('#tab-' + name).focus();
+  try { history.replaceState(null, '', '#' + (name === 'quiz' ? 'lab-escape' : name)); } catch (e) {}
+  window.scrollTo(0, 0);
+}
+TABS.forEach((t, i) => {
+  const b = $('#tab-' + t);
+  b.addEventListener('click', () => showTab(t));
+  b.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      const n = TABS[(i + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length];
+      showTab(n, true); e.preventDefault();
+    }
+  });
+});
+
+/* ---------- Zoom (tap a diagram to enlarge) ---------- */
+let zoomReturn = null;
+document.addEventListener('click', e => {
+  const f = e.target.closest('.fig');
+  if (f) {
+    const svg = f.querySelector('svg');
+    if (!svg) return;
+    zoomReturn = f;
+    $('#zoomInner').innerHTML = svg.outerHTML + (f.querySelector('.cap') ? `<p class="center">${f.querySelector('.cap').innerHTML}</p>` : '');
+    $('#zoom').classList.add('show');
+    $('#zoomClose').focus();
+  }
+  const r = e.target.closest('.reveal');
+  if (r) {
+    const t = document.getElementById(r.getAttribute('aria-controls'));
+    const open = t.hidden;
+    t.hidden = !open;
+    r.setAttribute('aria-expanded', open);
+    r.textContent = open ? r.textContent.replace('Show', 'Hide') : r.textContent.replace('Hide', 'Show');
+  }
+});
+function closeZoom() { $('#zoom').classList.remove('show'); if (zoomReturn) zoomReturn.focus(); }
+$('#zoomClose').addEventListener('click', closeZoom);
+$('#zoom').addEventListener('click', e => { if (e.target.id === 'zoom') closeZoom(); });
+$('#zoom').addEventListener('keydown', e => { if (e.key === 'Escape') closeZoom(); });
+
+/* ---------- Multiple-choice renderer (Read checks) ---------- */
+function mcq(container, item, onAnswer) {
+  const opts = shuffle([item.a, ...item.w]);
+  const box = document.createElement('div');
+  box.className = 'opts';
+  opts.forEach(o => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'opt'; b.innerHTML = esc(o);
+    b.addEventListener('click', () => {
+      const ok = o === item.a;
+      box.querySelectorAll('.opt').forEach(x => {
+        x.disabled = true;
+        if (x.textContent === item.a) { x.classList.add('right'); x.insertAdjacentHTML('beforeend', '<span class="mark" aria-hidden="true">✓</span>'); }
+      });
+      if (!ok) { b.classList.add('wrong'); b.insertAdjacentHTML('beforeend', '<span class="mark" aria-hidden="true">✗</span>'); }
+      onAnswer(ok, b);
+    });
+    box.appendChild(b);
+  });
+  container.appendChild(box);
+}
+
+/* ---------- Read section ---------- */
+let curPart = 0;
+function renderChips() {
+  $('#partChips').innerHTML = PARTS.map((p, i) => `<button type="button" data-i="${i}" aria-current="${i === curPart}">${p.chip}</button>`).join('');
+  $('#partChips').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { curPart = +b.dataset.i; renderPart(true); }));
+}
+function renderPart(scroll) {
+  renderChips();
+  const p = PARTS[curPart];
+  const body = $('#readBody');
+  body.innerHTML = `<div class="card"><p class="label">${p.chip.replace(/^\d /, 'Part ' + (curPart + 1) + ' · ')}</p><h2>${p.title}</h2><p class="muted">${p.sub}</p></div>` + p.html() +
+    `<div class="card"><p class="label">Check your understanding</p><h2>Try these</h2><p class="muted">Choose an answer. You will see if it is right, and why.</p><div id="checks"></div></div>` +
+    `<div class="navrow">${curPart > 0 ? `<button type="button" class="sec" id="prevPart">← ${PARTS[curPart - 1].chip}</button>` : '<span></span>'}${curPart < PARTS.length - 1 ? `<button type="button" id="nextPart">${PARTS[curPart + 1].chip} →</button>` : `<button type="button" id="goQuiz">Try the Lab Escape →</button>`}</div>`;
+  const ch = $('#checks');
+  p.checks.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'check';
+    d.innerHTML = `<p class="label">Check ${i + 1}</p><p class="qtext">${esc(c.q)}</p>${c.d ? `<div class="figs">${figure(c.d(), '')}</div>` : ''}`;
+    const fb = document.createElement('div');
+    mcq(d, c, ok => {
+      fb.className = 'fb ' + (ok ? 'ok' : 'no');
+      fb.innerHTML = `<b>${ok ? '✓ Correct!' : '✗ Not quite. The answer is: ' + esc(c.a)}</b>${esc(c.e)}`;
+      fb.setAttribute('tabindex', '-1'); fb.focus({ preventScroll: true });
+      say((ok ? 'Correct. ' : 'Not quite. The answer is ' + c.a + '. ') + c.e);
+      beep(ok ? 'good' : 'bad');
+    });
+    d.appendChild(fb);
+    ch.appendChild(d);
+  });
+  const pp = $('#prevPart'), np = $('#nextPart'), gq = $('#goQuiz');
+  if (pp) pp.onclick = () => { curPart--; renderPart(true); };
+  if (np) np.onclick = () => { curPart++; renderPart(true); };
+  if (gq) gq.onclick = () => showTab('quiz', true);
+  if (scroll) { window.scrollTo(0, 0); }
+}
+
+/* ---------- Watch section ---------- */
+function renderWatch() {
+  $('#watchBody').innerHTML = VIDEOS.map(g => `<div class="card"><p class="label">${g.part}</p>${g.none
+    ? `<h3>No video for this part</h3><p>There is no video for Part 3. Read "The drive for stability" in the Read tab instead. It explains full outer shells, the octet rule, and why atoms lose or gain electrons.</p><button type="button" class="big teal" data-goread="2">Open Part 3 in Read</button>`
+    : g.items.map(([t, ch, len, id, look]) => `<div class="vid"><div class="vframe" data-id="${id}" data-title="${esc(t)}">
+        <button type="button" class="play" aria-label="Play video: ${esc(t)}"><span class="tri" aria-hidden="true">▶</span><span>${esc(t)}</span><span class="muted">Press to load the video</span></button></div>
+        <div class="vmeta"><h3>${esc(t)}</h3><p class="muted">${ch} · ${len}</p>
+        <p class="look"><b>Look for:</b> ${look}</p>
+        <p><a href="https://www.youtube.com/watch?v=${id}" target="_blank" rel="noopener">Watch on YouTube (opens in a new tab)</a></p></div></div>`).join('')}</div>`).join('');
+  $('#watchBody').querySelectorAll('.vframe').forEach(f => {
+    f.querySelector('.play').addEventListener('click', () => {
+      f.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${f.dataset.id}?autoplay=1&rel=0" title="${f.dataset.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+    });
+  });
+  $('#watchBody').querySelectorAll('[data-goread]').forEach(b => b.addEventListener('click', () => { curPart = +b.dataset.goread; renderPart(); showTab('read', true); }));
+}
+
+/* ---------- Lab Escape ---------- */
+const NEED = 3;
+let Q = null;
+function newGame() {
+  Q = { door: 0, keys: 0, streak: 0, best: 0, answered: 0, correct: 0, doorCorrect: 0, used: DOORS.map(() => new Set()), queue: [], bonus: false, cur: null, lastId: null, firstTry: 0 };
+  fillQueue(0);
+}
+function fillQueue(d) {
+  // draw fresh questions at random from the door's bank, avoiding ones already seen this round
+  const bank = DOORS[d].bank.map((q, i) => i);
+  let fresh = bank.filter(i => !Q.used[d].has(i));
+  if (fresh.length === 0) { Q.used[d].clear(); fresh = bank.filter(i => i !== Q.lastId); }
+  Q.queue = shuffle(fresh);
+}
+function nextQ() {
+  if (!Q.queue.length) fillQueue(Q.door);
+  const i = Q.queue.shift();
+  Q.used[Q.door].add(i); Q.lastId = i;
+  Q.cur = DOORS[Q.door].bank[i];
+  renderQ();
+}
+function totalNeeded() { return (Q.bonus ? 8 : 7) * NEED; }
+function statusHTML() {
+  const doorsShown = Q.bonus ? 8 : 7;
+  const pct = Math.min(100, Math.round(Q.keys / totalNeeded() * 100));
+  const doors = DOORS.slice(0, doorsShown).map((d, i) => `<span class="${i < Q.door ? 'open' : ''} ${i === Q.door ? 'now' : ''}" title="${d.name}">${i < Q.door ? '🔓' : (i === Q.door ? d.icon : '🔒')}</span>`).join('');
+  return `<div class="card"><div class="status"><span>Door ${Math.min(Q.door + 1, doorsShown)}/${doorsShown}${Q.bonus ? ' (bonus)' : ''}</span><span>🗝️ Keys: <span class="k">${Q.keys}</span></span><span>🔥 Streak: <span class="s">${Q.streak}</span></span></div>
+    <div class="bar" role="progressbar" aria-label="Escape progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}"><i style="width:${pct}%"></i></div>
+    <div class="doors" aria-hidden="true">${doors}</div></div>`;
+}
+function renderStart() {
+  $('#quizBody').innerHTML = `<div class="card center"><div class="hero" aria-hidden="true">🧪🔒</div><p class="label">Lab Escape</p><h2>You are locked in the chemistry lab!</h2>
+    <p>Seven doors stand between you and the exit. Each door has a lock that opens after <b>3 correct answers</b>. Get one wrong and the lock gives you a different question, so read the explanation first.</p>
+    <p class="muted">Questions are drawn at random each time you play. A bonus eighth door, the Molar Mass Vault, waits at the end.</p>
+    <div class="doorlist">${DOORS.map((d, i) => `<div>${d.icon} <b>${i < 7 ? 'Door ' + (i + 1) : 'Bonus'}: ${d.name}</b><br><span class="muted">${d.part}</span></div>`).join('')}</div>
+    <button type="button" class="big" id="startBtn">Start the escape</button></div>`;
+  $('#startBtn').onclick = () => { newGame(); nextQ(); };
+}
+function renderQ() {
+  const d = DOORS[Q.door], q = Q.cur;
+  $('#quizBody').innerHTML = statusHTML() + `<div class="card" id="qcard"><p class="doorname">${d.icon} ${d.name} · lock ${Q.doorCorrect}/${NEED} · ${d.part}</p>
+    <p class="label">${q.c}</p><h2 class="qtext" id="qtext" tabindex="-1">${esc(q.q)}</h2>${q.data ? `<p class="data">${q.data}</p>` : ''}
+    ${q.d ? `<div class="figs">${figure(q.d(), '', q.d().includes('Group') ? 'wide' : '')}</div>` : ''}<div id="qopts"></div><div id="qfb"></div></div>`;
+  mcq($('#qopts'), q, (ok) => answer(ok));
+  $('#qtext').focus({ preventScroll: true });
+}
+function answer(ok) {
+  const q = Q.cur;
+  Q.answered++;
+  const fb = $('#qfb');
+  if (ok) {
+    Q.correct++; Q.keys++; Q.doorCorrect++; Q.streak++; Q.best = Math.max(Q.best, Q.streak);
+    beep('good');
+    fb.innerHTML = `<div class="fb ok"><b>✓ Correct! Key collected.</b>${esc(q.e)}</div>`;
+    say('Correct. Key collected. ' + q.e);
+  } else {
+    Q.streak = 0;
+    beep('bad');
+    fb.innerHTML = `<div class="fb no"><b>✗ Not this time. The answer is: ${esc(q.a)}</b>${esc(q.e)}<br><span class="muted">The lock will now give you a different question on the same idea.</span></div>`;
+    say('Not this time. The answer is ' + q.a + '. ' + q.e);
+  }
+  const doorDone = Q.doorCorrect >= NEED;
+  fb.insertAdjacentHTML('beforeend', `<div class="navrow" style="justify-content:flex-end"><button type="button" id="nextBtn">${doorDone ? 'Open the door 🔓' : 'Next question →'}</button></div>`);
+  // refresh the status bar
+  $('#quizBody').firstElementChild.outerHTML = statusHTML();
+  $('#nextBtn').focus({ preventScroll: true });
+  $('#nextBtn').onclick = () => doorDone ? openDoor() : nextQ();
+}
+function confetti() {
+  const c = $('#confetti'); c.innerHTML = '';
+  const cols = ['#f472b6', '#34d399', '#fcd34d', '#a78bfa', '#60a5fa'];
+  for (let i = 0; i < 40; i++) c.insertAdjacentHTML('beforeend', `<i style="left:${Math.random() * 100}%;background:${cols[i % 5]};animation-delay:${Math.random() * 0.5}s"></i>`);
+}
+function party(html, btns) {
+  $('#partyInner').innerHTML = html + `<div class="navrow" style="justify-content:center;flex-wrap:wrap">${btns.map(([id, t, cls]) => `<button type="button" id="${id}" class="${cls || ''}">${t}</button>`).join('')}</div>`;
+  $('#party').classList.add('show'); confetti();
+  setTimeout(() => { const b = $('#partyInner button'); if (b) b.focus(); }, 50);
+}
+function closeParty() { $('#party').classList.remove('show'); }
+function openDoor() {
+  const d = DOORS[Q.door];
+  beep('door');
+  const last = Q.door === 6 && !Q.bonus;
+  if (Q.door === 7) { closeParty(); return escaped(); }
+  if (last) {
+    party(`<div class="hero">🚪✨</div><h2 id="partyTitle">${d.name} unlocked!</h2><p>That was the last main door. You can escape now, or try the bonus Molar Mass Vault for 3 extra keys.</p>`,
+      [['bonusBtn', 'Try the bonus door ⚖️'], ['escBtn', 'Escape now', 'sec']]);
+    $('#bonusBtn').onclick = () => { closeParty(); Q.bonus = true; Q.door = 7; Q.doorCorrect = 0; fillQueue(7); nextQ(); };
+    $('#escBtn').onclick = () => { closeParty(); escaped(); };
+    return;
+  }
+  const nd = DOORS[Q.door + 1];
+  party(`<div class="hero">🔓</div><h2 id="partyTitle">${d.name} unlocked!</h2><p>Next up: ${nd.icon} <b>${nd.name}</b><br><span class="muted">${nd.part}</span></p>`, [['goOn', 'Go through the door →']]);
+  $('#goOn').onclick = () => { closeParty(); Q.door++; Q.doorCorrect = 0; fillQueue(Q.door); nextQ(); };
+}
+function escaped() {
+  Q.door = Q.bonus ? 8 : 7;
+  beep('door');
+  const acc = Q.answered ? Math.round(Q.correct / Q.answered * 100) : 0;
+  $('#quizBody').innerHTML = `<div class="card center"><div class="hero" aria-hidden="true">🏃‍♀️🚪🌿</div><p class="label">Lab Escape</p><h2 tabindex="-1" id="escTitle">Escaped! Ka pai!</h2>
+    <p>You unlocked ${Q.bonus ? 'all eight doors, including the bonus vault' : 'all seven doors'}.</p>
+    <div class="statgrid"><div><b>${Q.keys}</b>keys collected</div><div><b>${Q.correct}/${Q.answered}</b>answers correct</div><div><b>${acc}%</b>accuracy</div><div><b>${Q.best}</b>best streak</div></div>
+    <p class="muted">Each new game draws different questions and shuffles the answers. Play again to test yourself on fresh questions.</p>
+    <div class="navrow" style="justify-content:center;flex-wrap:wrap"><button type="button" id="againBtn">Play again</button><button type="button" class="sec" id="toRead">Back to Read</button></div></div>`;
+  $('#escTitle').focus();
+  confettiInline();
+  $('#againBtn').onclick = () => { newGame(); nextQ(); };
+  $('#toRead').onclick = () => showTab('read', true);
+}
+function confettiInline() { /* the celebration overlay already ran on the last door */ }
+
+/* ---------- Start ---------- */
+renderPart();
+renderWatch();
+renderStart();
+const h = (location.hash || '').replace('#', '');
+if (h === 'watch') showTab('watch'); else if (h === 'lab-escape') showTab('quiz');
+</script>
+</body></html>
