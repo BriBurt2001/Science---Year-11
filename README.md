@@ -3,5 +3,5 @@ Bio - DNA, genes and making proteins, chemistry and problem solving space and ma
 
 3 Files
 [Biology](dna-genes-protein-making.html)
-[Chemistry](Chemistry)
+[Chemistry](Chemistry.html)
 [Physics](Physics)
