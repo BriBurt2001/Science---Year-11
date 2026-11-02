@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en-NZ">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Weigh That Space Rock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#3b0f6b; --bg2:#1d0b3d; --card:#151833; --card2:#1c2140; --line:#2b3566;
+  --opt:#1f2a3d; --optline:#1e5a7a; --text:#ffffff; --muted:#c3c6e0; --dim:#9aa0c8;
+  --pink:#f472b6; --teal:#2dd4bf; --amber:#fbbf24; --good:#34d399; --bad:#fb7185; --blue:#60a5fa;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:#1d0b3d}
+body{margin:0;font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);
+  background:radial-gradient(1200px 700px at 15% -10%,#5b1a9a 0%,transparent 60%),linear-gradient(160deg,var(--bg1),var(--bg2) 70%);
+  background-repeat:no-repeat;background-color:#1d0b3d;min-height:100vh;line-height:1.55;font-size:17px}
+.wrap{max-width:920px;margin:0 auto;padding:16px 16px 64px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 14px}
+header.top h1{margin:0;font-size:clamp(24px,4.4vw,32px);font-weight:900;letter-spacing:.2px;text-shadow:0 0 18px rgba(244,114,182,.35)}
+header.top h1 .sub{display:block;font-size:14px;font-weight:700;color:var(--muted);text-shadow:none;letter-spacing:.3px}
+.pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);color:#fff;border-radius:999px;padding:9px 16px;font:inherit;font-weight:800;font-size:15px;cursor:pointer;min-height:44px}
+.pill:hover{background:rgba(255,255,255,.2)}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:6px;margin-bottom:16px}
+.tab{background:transparent;border:0;color:var(--muted);font:inherit;font-weight:800;font-size:16px;padding:12px 8px;border-radius:13px;cursor:pointer;min-height:48px}
+.tab[aria-selected="true"]{background:linear-gradient(90deg,var(--pink),#c084fc);color:#1a0b2e}
+.tab:not([aria-selected="true"]):hover{background:var(--card2);color:#fff}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 24px;margin-bottom:16px}
+@media (max-width:560px){.card{padding:18px 16px;border-radius:18px}body{font-size:16px}}
+.label{color:var(--pink);font-weight:900;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 6px}
+.label.y12{color:var(--amber)}
+h2{font-size:clamp(21px,3.6vw,26px);margin:0 0 8px;font-weight:900;line-height:1.25}
+h3{font-size:19px;margin:22px 0 8px;font-weight:900}
+h4{font-size:16px;margin:0 0 6px;font-weight:900}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+strong{font-weight:800}
+.badge{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-right:6px;vertical-align:middle}
+.badge.y11{background:rgba(45,212,191,.16);color:var(--teal);border:1px solid rgba(45,212,191,.45)}
+.badge.y12{background:rgba(251,191,36,.14);color:var(--amber);border:1px solid rgba(251,191,36,.5)}
+/* part navigation */
+.partnav{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.partgroup{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.partgroup .glabel{font-size:12px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--dim);min-width:100%}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--muted);font:inherit;font-weight:800;font-size:14px;border-radius:999px;padding:8px 14px;cursor:pointer;min-height:44px}
+.chip:hover{color:#fff;border-color:#4b5aa0}
+.chip[aria-current="true"]{background:var(--teal);color:#06261f;border-color:var(--teal)}
+.chip.y12[aria-current="true"]{background:var(--amber);color:#2a1a00;border-color:var(--amber)}
+/* boxes */
+.box{border-radius:16px;padding:14px 16px;margin:14px 0;border:1px solid var(--line);background:var(--card2)}
+.box.key{border-color:rgba(244,114,182,.5);background:rgba(244,114,182,.07)}
+.box.warn{border-color:rgba(251,191,36,.5);background:rgba(251,191,36,.07)}
+.box.big{border-color:rgba(45,212,191,.45);background:rgba(45,212,191,.07)}
+.box h4 .ic{margin-right:6px}
+.formula{font-size:22px;font-weight:900;text-align:center;margin:8px 0;letter-spacing:.5px}
+.worked{border:1px solid rgba(96,165,250,.5);background:rgba(96,165,250,.07);border-radius:16px;padding:14px 16px;margin:16px 0}
+.worked ol{margin:8px 0 0;padding-left:22px}
+.worked li{margin-bottom:10px}
+.worked .why{display:block;color:var(--muted);font-size:15px}
+.worked .ans{font-weight:900;color:var(--teal)}
+figure{margin:16px 0;background:#0f1229;border:1px solid var(--line);border-radius:16px;padding:12px}
+figure svg{display:block;width:100%;height:auto;max-width:560px;margin:0 auto}
+figcaption{font-size:14px;color:var(--muted);text-align:center;margin-top:6px}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:10px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+th{background:var(--card2);font-weight:900}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+ul.tight{margin:6px 0 12px;padding-left:22px}
+ul.tight li{margin-bottom:6px}
+/* MCQ */
+.check{margin-top:18px}
+.q{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:12px 0}
+.q .qtext{font-weight:800;margin-bottom:10px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:block;width:100%;text-align:left;background:var(--opt);border:2px solid var(--optline);color:#fff;font:inherit;font-weight:800;font-size:16px;border-radius:14px;padding:14px 16px;cursor:pointer;min-height:52px;transition:background .15s,border-color .15s,transform .05s}
+.opt:hover:not(:disabled){background:#26344d;border-color:#2b86b0}
+.opt:active:not(:disabled){transform:scale(.995)}
+.opt:disabled{cursor:default}
+.opt.correct{background:rgba(52,211,153,.18);border-color:var(--good)}
+.opt.wrong{background:rgba(251,113,133,.16);border-color:var(--bad)}
+.opt .mark{float:right;font-weight:900;margin-left:10px}
+.opt.dim{opacity:.6}
+.fb{margin-top:10px;border-radius:12px;padding:10px 14px;font-size:15px}
+.fb.good{background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.45)}
+.fb.bad{background:rgba(251,113,133,.1);border:1px solid rgba(251,113,133,.45)}
+.fb b{font-weight:900}
+.navrow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{background:linear-gradient(90deg,var(--pink),#c084fc);color:#1a0b2e;border:0;font:inherit;font-weight:900;font-size:16px;border-radius:14px;padding:12px 20px;cursor:pointer;min-height:48px}
+.btn.ghost{background:transparent;color:#fff;border:2px solid var(--line)}
+.btn.ghost:hover{border-color:#5563a8}
+.btn:disabled{opacity:.4;cursor:default}
+/* video */
+.vid{background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0}
+.vframe{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#21124a,#0d2a3a);display:flex;align-items:center;justify-content:center}
+.vframe iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.play{display:flex;flex-direction:column;align-items:center;gap:8px;background:transparent;border:0;color:#fff;font:inherit;font-weight:900;cursor:pointer;padding:20px;min-height:44px}
+.play .circle{width:72px;height:72px;border-radius:50%;background:var(--pink);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(244,114,182,.18)}
+.vmeta{margin-top:10px}
+.vmeta .t{font-weight:900}
+.vmeta a{color:#93c5fd;font-weight:800;word-break:break-all}
+.look{margin-top:8px;font-size:15px;color:var(--muted)}
+.look b{color:#fff}
+/* quiz */
+.status{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px;font-weight:900;font-size:15px}
+.status .r{text-align:right}
+.status .c{text-align:center}
+.cr{color:var(--teal)} .st{color:var(--amber)}
+.bar{height:12px;border-radius:999px;background:#2a3150;margin-top:12px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--teal));border-radius:999px;transition:width .35s}
+.qcard h2{margin-bottom:14px}
+.qfig{margin:6px 0 16px;background:transparent;border:0;padding:0}
+.qfig svg{max-width:440px}
+.hero{text-align:center}
+.hero .big{font-size:54px;line-height:1}
+.stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.stat .n{font-size:26px;font-weight:900}
+.stat .l{font-size:13px;color:var(--muted);font-weight:700}
+.review li{margin-bottom:10px}
+.linklike{background:none;border:0;color:#93c5fd;font:inherit;font-weight:800;text-decoration:underline;cursor:pointer;padding:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1><span aria-hidden="true">☄️</span> Weigh That Space Rock <span class="sub">Mass, inertia and the oscillating rod · Year 11 into Year 12 Physics</span></h1>
+    <button class="pill" id="soundBtn" aria-pressed="false">🔇 Sound off</button>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button class="tab" role="tab" id="tab-read" aria-controls="view-read" data-view="read">📖 Read</button>
+    <button class="tab" role="tab" id="tab-watch" aria-controls="view-watch" data-view="watch">🎬 Watch</button>
+    <button class="tab" role="tab" id="tab-mission" aria-controls="view-mission" data-view="mission">🚀 Mission</button>
+  </nav>
+
+  <main>
+    <section id="view-read" role="tabpanel" aria-labelledby="tab-read" hidden>
+      <div class="partnav" id="partnav"></div>
+      <article class="card" id="partBody" aria-live="polite"></article>
+    </section>
+
+    <section id="view-watch" role="tabpanel" aria-labelledby="tab-watch" hidden>
+      <div class="card">
+        <p class="label">Watch</p>
+        <h2>Videos for each part</h2>
+        <p>The videos are grouped by part. Press <strong>Play here</strong> to load a video. If the player stays blank, use the link under it to open the video on YouTube.</p>
+        <p class="muted small">Parts 2, 4 and 6 have no video. Use the Read section for those parts.</p>
+      </div>
+      <div id="watchBody"></div>
+    </section>
+
+    <section id="view-mission" role="tabpanel" aria-labelledby="tab-mission" hidden>
+      <div id="missionBody"></div>
+    </section>
+  </main>
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+const $ = s => document.querySelector(s);
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+function load(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v);}catch(e){return d;}}
+
+/* ---------- sound ---------- */
+let soundOn = load('wtsr-sound', false), actx = null;
+function setSoundLabel(){const b=$('#soundBtn');b.textContent=soundOn?'🔊 Sound on':'🔇 Sound off';b.setAttribute('aria-pressed',soundOn?'true':'false');}
+$('#soundBtn').addEventListener('click',()=>{soundOn=!soundOn;store('wtsr-sound',soundOn);setSoundLabel();if(soundOn)tone([660,880],.09);});
+function tone(freqs,dur){
+  if(!soundOn)return;
+  try{
+    actx = actx || new (window.AudioContext||window.webkitAudioContext)();
+    let t = actx.currentTime;
+    freqs.forEach(f=>{const o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.18,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g).connect(actx.destination);o.start(t);o.stop(t+dur+.02);t+=dur*.9;});
+  }catch(e){}
+}
+const sGood=()=>tone([523,659,784],.1), sBad=()=>tone([300,220],.14);
+
+/* ---------- graph drawing ---------- */
+/* Data from a model inertia balance: T^2 = 1.0 m + 0.05 (T in s, m in kg) */
+const DATA = [[0.10,0.39],[0.20,0.50],[0.30,0.59],[0.40,0.67],[0.50,0.74]];
+function graph(o){
+  const W=o.w||380,H=o.h||260,L=58,R=18,T=18,B=48;
+  const xMin=o.xMin||0,yMin=o.yMin||0;
+  const sx=x=>L+(x-xMin)/(o.xMax-xMin)*(W-L-R), sy=y=>H-B-(y-yMin)/(o.yMax-yMin)*(H-B-T);
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(o.alt)}" xmlns="http://www.w3.org/2000/svg" font-family="Nunito, sans-serif">`;
+  // grid + ticks
+  (o.xTicks||[]).forEach(x=>{s+=`<line x1="${sx(x)}" y1="${sy(yMin)}" x2="${sx(x)}" y2="${sy(o.yMax)}" stroke="#2b3566" stroke-width="1"/><text x="${sx(x)}" y="${H-B+18}" fill="#c3c6e0" font-size="12" text-anchor="middle">${x}</text>`;});
+  (o.yTicks||[]).forEach(y=>{s+=`<line x1="${sx(xMin)}" y1="${sy(y)}" x2="${sx(o.xMax)}" y2="${sy(y)}" stroke="#2b3566" stroke-width="1"/><text x="${L-8}" y="${sy(y)+4}" fill="#c3c6e0" font-size="12" text-anchor="end">${y}</text>`;});
+  // axes (through zero if inside range)
+  const ax0 = xMin<0? sx(0):sx(xMin);
+  s+=`<line x1="${sx(xMin)}" y1="${sy(yMin)}" x2="${sx(o.xMax)}" y2="${sy(yMin)}" stroke="#a9b0d6" stroke-width="2"/>`;
+  s+=`<line x1="${ax0}" y1="${sy(yMin)}" x2="${ax0}" y2="${sy(o.yMax)}" stroke="#a9b0d6" stroke-width="2"/>`;
+  s+=`<text x="${(L+W-R)/2}" y="${H-8}" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">${o.xLabel}</text>`;
+  s+=`<text transform="translate(16 ${(T+H-B)/2}) rotate(-90)" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">${o.yLabel}</text>`;
+  // curve
+  if(o.curve){let d='';const n=60;for(let i=0;i<=n;i++){const x=o.curve.from+(o.curve.to-o.curve.from)*i/n;const y=o.curve.f(x);d+=(i?'L':'M')+sx(x).toFixed(1)+' '+sy(y).toFixed(1);}s+=`<path d="${d}" fill="none" stroke="#f472b6" stroke-width="3" stroke-linecap="round"/>`;}
+  if(o.line){const {m,c,from,to,extendFrom}=o.line;
+    if(extendFrom!==undefined){s+=`<line x1="${sx(extendFrom)}" y1="${sy(m*extendFrom+c)}" x2="${sx(from)}" y2="${sy(m*from+c)}" stroke="#2dd4bf" stroke-width="2.5" stroke-dasharray="6 5"/>`;}
+    s+=`<line x1="${sx(from)}" y1="${sy(m*from+c)}" x2="${sx(to)}" y2="${sy(m*to+c)}" stroke="#2dd4bf" stroke-width="3" stroke-linecap="round"/>`;}
+  // read-off
+  if(o.read){const {x,y,label}=o.read;
+    s+=`<line x1="${ax0}" y1="${sy(y)}" x2="${sx(x)}" y2="${sy(y)}" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 4"/>`;
+    s+=`<line x1="${sx(x)}" y1="${sy(y)}" x2="${sx(x)}" y2="${sy(yMin)}" stroke="#fbbf24" stroke-width="2" stroke-dasharray="5 4"/>`;
+    s+=`<circle cx="${sx(x)}" cy="${sy(y)}" r="5" fill="#fbbf24"/>`;
+    if(label)s+=`<text x="${sx(x)+8}" y="${sy(y)-8}" fill="#fbbf24" font-size="12" font-weight="800">${label}</text>`;}
+  if(o.mark){o.mark.forEach(mk=>{s+=`<text x="${sx(mk.x)}" y="${sy(mk.y)}" fill="${mk.c||'#fbbf24'}" font-size="12" font-weight="800" text-anchor="${mk.a||'start'}">${mk.t}</text>`;});}
+  (o.points||[]).forEach(([x,y])=>{s+=`<g stroke="#fff" stroke-width="2"><line x1="${sx(x)-5}" y1="${sy(y)-5}" x2="${sx(x)+5}" y2="${sy(y)+5}"/><line x1="${sx(x)-5}" y1="${sy(y)+5}" x2="${sx(x)+5}" y2="${sy(y)-5}"/></g>`;});
+  return s+'</svg>';
+}
+const curveGraph = (read,alt) => graph({xMax:0.6,yMax:0.8,xTicks:[0,0.1,0.2,0.3,0.4,0.5,0.6],yTicks:[0,0.2,0.4,0.6,0.8],xLabel:'Mass taped to rod, m (kg)',yLabel:'Period, T (s)',points:DATA,curve:{from:0.0,to:0.58,f:m=>Math.sqrt(m+0.05)},read,alt:alt||'Curved graph of period against mass. Period rises with mass, but the curve gets less steep.'});
+const lineGraph = (read,alt) => graph({xMin:-0.1,xMax:0.6,yMax:0.7,xTicks:[-0.1,0,0.1,0.2,0.3,0.4,0.5,0.6],yTicks:[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7],xLabel:'Mass taped to rod, m (kg)',yLabel:'Period squared, T² (s²)',points:DATA.map(([m,t])=>[m,+(t*t).toFixed(3)]),line:{m:1.0,c:0.05,from:0,to:0.6,extendFrom:-0.05},read,mark:[{x:0.012,y:0.075,t:'intercept ≈ 0.05 s²',c:'#2dd4bf'}],alt:alt||'Straight-line graph of period squared against mass. The line cuts the vertical axis at about 0.05 seconds squared, not at the origin.'});
+
+/* ---------- diagrams ---------- */
+const forceSVG = `<svg viewBox="0 0 420 280" role="img" aria-label="Force diagram. A rock rests on scales. An arrow labelled support force points up. An arrow of equal length labelled weight points down." xmlns="http://www.w3.org/2000/svg" font-family="Nunito, sans-serif">
+<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="context-stroke"/></marker></defs>
+<rect x="110" y="196" width="200" height="40" rx="8" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+<rect x="150" y="186" width="120" height="12" rx="4" fill="#64748b"/>
+<rect x="180" y="208" width="60" height="18" rx="3" fill="#0f172a" stroke="#2dd4bf"/><text x="210" y="222" fill="#2dd4bf" font-size="12" font-weight="800" text-anchor="middle">2.0 kg</text>
+<text x="210" y="256" fill="#c3c6e0" font-size="13" text-anchor="middle">scales</text>
+<path d="M168 186 Q160 150 186 132 Q214 114 244 130 Q264 144 254 186 Z" fill="#7c6a5a" stroke="#d6c3ad" stroke-width="2"/>
+<circle cx="200" cy="155" r="4" fill="#5b4b3e"/><circle cx="228" cy="166" r="3" fill="#5b4b3e"/>
+<line x1="210" y1="186" x2="210" y2="58" stroke="#2dd4bf" stroke-width="5" marker-end="url(#ah)"/>
+<text x="222" y="70" fill="#2dd4bf" font-size="16" font-weight="900">F<tspan font-size="12" dy="4">support</tspan></text>
+<text x="222" y="90" fill="#c3c6e0" font-size="12" dy="0">push from the scales</text>
+<line x1="196" y1="158" x2="196" y2="276" stroke="#f472b6" stroke-width="5" marker-end="url(#ah)" opacity=".95"/>
+<text x="74" y="268" fill="#f472b6" font-size="16" font-weight="900">F<tspan font-size="12" dy="4">weight</tspan></text>
+<text x="28" y="130" fill="#c3c6e0" font-size="12">Same length arrows:</text><text x="28" y="146" fill="#c3c6e0" font-size="12">forces are balanced</text>
+</svg>`;
+
+const rodSVG = `<svg viewBox="0 0 520 280" role="img" aria-label="Oscillating rod seen from above. One end of a flexible rod is clamped to the edge of a bench. A known mass is taped to the free end. The free end vibrates from side to side." xmlns="http://www.w3.org/2000/svg" font-family="Nunito, sans-serif">
+<defs><marker id="ah2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#fbbf24"/></marker></defs>
+<rect x="10" y="40" width="120" height="200" rx="6" fill="#4b3a2a" stroke="#a78b6d" stroke-width="2"/>
+<text x="70" y="262" fill="#c3c6e0" font-size="13" text-anchor="middle">bench</text>
+<rect x="96" y="118" width="54" height="44" rx="6" fill="#64748b" stroke="#cbd5e1" stroke-width="2"/>
+<text x="123" y="108" fill="#c3c6e0" font-size="13" text-anchor="middle">clamp</text>
+<path d="M150 140 Q300 140 430 76" stroke="#94a3b8" stroke-width="5" fill="none" opacity=".28"/>
+<rect x="414" y="58" width="34" height="34" rx="5" fill="#2dd4bf" opacity=".22" transform="rotate(-20 431 75)"/>
+<path d="M150 140 Q300 140 430 204" stroke="#94a3b8" stroke-width="5" fill="none" opacity=".28"/>
+<rect x="414" y="188" width="34" height="34" rx="5" fill="#2dd4bf" opacity=".22" transform="rotate(20 431 205)"/>
+<line x1="150" y1="140" x2="440" y2="140" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round"/>
+<rect x="424" y="122" width="38" height="36" rx="6" fill="#2dd4bf" stroke="#ccfbf1" stroke-width="2"/>
+<line x1="420" y1="130" x2="466" y2="130" stroke="#fef3c7" stroke-width="3" opacity=".8"/>
+<line x1="420" y1="150" x2="466" y2="150" stroke="#fef3c7" stroke-width="3" opacity=".8"/>
+<path d="M486 92 Q510 140 486 188" fill="none" stroke="#fbbf24" stroke-width="3" marker-start="url(#ah2)" marker-end="url(#ah2)"/>
+<text x="290" y="130" fill="#fff" font-size="13" font-weight="800" text-anchor="middle">flexible rod</text>
+<text x="443" y="250" fill="#2dd4bf" font-size="13" font-weight="800" text-anchor="middle">known mass,</text>
+<text x="443" y="266" fill="#2dd4bf" font-size="13" font-weight="800" text-anchor="middle">taped to the end</text>
+<text x="500" y="40" fill="#fbbf24" font-size="13" font-weight="800" text-anchor="end">vibrates side to side</text>
+<text x="290" y="24" fill="#c3c6e0" font-size="13" text-anchor="middle">View from above</text>
+</svg>`;
+
+/* ---------- READ content ---------- */
+const PARTS = [
+{ n:1, y:11, title:'Mass and weight', label:'Starting point',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>Mass and weight are different quantities. Mass is the amount of matter in an object. Weight is the gravitational force on that mass.</p></div>
+<p>We normally use scales to find the mass of something. This works because weight is <strong>proportional</strong> to mass. Put simply, the more mass an object has, the more weight it has.</p>
+<div class="box key"><h4><span class="ic" aria-hidden="true">🧠</span>Key note</h4>
+<div class="formula">W = mg</div>
+<ul class="tight"><li><strong>W</strong> is weight, in newtons (N).</li><li><strong>m</strong> is mass, in kilograms (kg).</li><li><strong>g</strong> is gravitational acceleration. On Earth, g = 9.8 m s⁻².</li></ul></div>
+<div class="tablewrap"><table><thead><tr><th></th><th>Mass</th><th>Weight</th></tr></thead><tbody>
+<tr><th>What it is</th><td>Amount of matter</td><td>Gravitational force on the mass</td></tr>
+<tr><th>Unit</th><td>kilogram (kg)</td><td>newton (N)</td></tr>
+<tr><th>Type</th><td>Not a force</td><td>A force, so it has a direction (down)</td></tr>
+<tr><th>Changes in space?</th><td>No. It is the same everywhere.</td><td>Yes. It depends on g.</td></tr>
+</tbody></table></div>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: weight from mass</h4>
+<p>A space rock has a mass of 2.5 kg. Find its weight on Earth.</p>
+<ol>
+<li>Write the formula: W = mg. <span class="why">Reason: weight links to mass through g.</span></li>
+<li>Substitute: W = 2.5 × 9.8. <span class="why">Reason: m = 2.5 kg and g on Earth is 9.8 m s⁻².</span></li>
+<li>Calculate: W = 24.5. <span class="why">Reason: 2.5 × 9.8 = 24.5.</span></li>
+<li>Add the unit: <span class="ans">W = 24.5 N</span>. <span class="why">Reason: weight is a force, so it is measured in newtons.</span></li>
+</ol>
+<p class="small muted">Extension: on the Moon g is about 1.6 m s⁻². The same rock weighs 2.5 × 1.6 = 4.0 N. Its mass is still 2.5 kg.</p></div>
+<div class="box warn"><h4><span class="ic" aria-hidden="true">⚠️</span>Watch out</h4><p>In everyday speech people say "I weigh 60 kg". In physics, 60 kg is a <strong>mass</strong>. That person's weight on Earth is about 590 N.</p></div>
+<p><strong>In summary,</strong> mass stays the same wherever the rock goes, but its weight depends on the local value of g. This difference explains why scales cause trouble in space.</p>`,
+  checks:[
+  {q:'A student says, "My weight is 60 kg." Which statement is correct physics?',o:['My mass is 60 kg, and my weight on Earth is about 590 N.','My weight is 60 N, and my mass is 590 kg.','Mass and weight are the same thing, so 60 kg is fine.','My weight is 60 kg on Earth and 0 kg in space.'],a:0,why:'Kilograms measure mass. Weight is a force: W = mg = 60 × 9.8 ≈ 590 N.'},
+  {q:'A rock has a mass of 0.50 kg. What is its weight on Earth?',o:['4.9 N','0.50 N','9.8 N','0.051 N'],a:0,why:'W = mg = 0.50 × 9.8 = 4.9 N.'},
+  {q:'An astronaut takes a rock from Earth to the Moon. What changes?',o:['Only its weight','Only its mass','Both its mass and its weight','Neither its mass nor its weight'],a:0,why:'Mass is the amount of matter, so it does not change. Weight depends on g, which is smaller on the Moon.'}
+  ]},
+{ n:2, y:11, title:'Why scales fail in space', label:'The problem',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>Scales do not measure mass directly. They measure a force, and that force disappears when you float in space.</p></div>
+<p>There are two reasons why normal scales do not work for a floating astronaut.</p>
+<h3>Reason 1: g is not fixed in space</h3>
+<p>On Earth, g is about 9.8 m s⁻² everywhere we stand. In space, there is no single value for g. It depends on how far you are from Earth, and from other bodies such as the Moon. Scales are set up for Earth. They divide the force by 9.8 to show a mass. If g is different, the mass shown is wrong.</p>
+<h3>Reason 2: there is no support force</h3>
+<p>When you put a rock on scales, the scales push up on it. This push is the <strong>support force</strong>. The rock is still, so the forces are balanced. The support force equals the weight. It is the support force that the scales actually measure.</p>
+<figure>${forceSVG}<figcaption>A rock at rest on scales on Earth. The support force (up) balances the weight (down).</figcaption></figure>
+<p>A floating astronaut, the rock and the scales all fall together around Earth. Nothing presses the rock onto the scales. So there is no support force, and the scales read zero.</p>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: what the scales "see"</h4>
+<p>A 2.0 kg rock sits on bathroom scales on Earth. Then it is placed on the same scales while floating in space.</p>
+<ol>
+<li>Find the weight on Earth: W = mg = 2.0 × 9.8 = 19.6 N. <span class="why">Reason: weight depends on mass and g.</span></li>
+<li>Find the support force: 19.6 N. <span class="why">Reason: the rock is still, so the forces are balanced.</span></li>
+<li>Find the display: 19.6 ÷ 9.8 = 2.0 kg. <span class="why">Reason: the scales measure the support force and assume g = 9.8 m s⁻².</span></li>
+<li>In space, the support force is 0 N, so the display shows <span class="ans">0 kg</span>. <span class="why">Reason: nothing pushes the rock onto the scales. Its mass is still 2.0 kg.</span></li>
+</ol></div>
+<div class="box warn"><h4><span class="ic" aria-hidden="true">⚠️</span>Watch out</h4><p>"Weightless" does not mean "massless". The rock still has all of its matter. Only the scales' reading has gone.</p></div>
+<p><strong>In summary,</strong> scales measure support force and assume Earth's g, so both assumptions fail for a floating astronaut. We need a method that uses a different property of mass.</p>`,
+  checks:[
+  {q:'What do bathroom scales actually measure?',o:['The support force pushing up on the object','The mass of the object directly','The amount of air under the object','The speed of the object'],a:0,why:'Scales measure the support force. On Earth this equals the weight, so the scales convert it to a mass using g = 9.8 m s⁻².'},
+  {q:'A floating astronaut places a rock on scales. The scales read zero. Why?',o:['Nothing presses the rock onto the scales, so there is no support force.','The rock has no mass in space.','There is no gravity at all in space.','The scales are too cold to work.'],a:0,why:'The rock and the scales float together. The rock still has mass, but no support force acts.'},
+  {q:'Earth scales are used on Mars, where g is smaller. What happens to the mass shown?',o:['It is too small, because the scales still assume g = 9.8 m s⁻².','It is correct, because mass never changes.','It is too large, because Mars is further from the Sun.','It shows zero, because there is no support force.'],a:0,why:'On Mars the support force is smaller. The scales divide by 9.8, so they show a mass that is too small.'}
+  ]},
+{ n:3, y:11, title:'Inertia and F = ma', label:'New physics',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>An object's mass still matters in space. Mass resists changes in motion. This property is called <strong>inertia</strong>.</p></div>
+<p>Suppose you are floating in space. You need to move two rocks out of your way. One rock is 20 kg and the other is 200 kg. Which is easier to shift?</p>
+<p>The 20 kg rock is easier. The 200 kg rock has more inertia. More mass needs more force to give it the same acceleration. Neither rock has any weight here, so this difference comes from mass alone.</p>
+<div class="box key"><h4><span class="ic" aria-hidden="true">🧠</span>Key note: Newton's second law</h4>
+<div class="formula">F = ma</div>
+<ul class="tight"><li><strong>F</strong> is the net force, in newtons (N).</li><li><strong>m</strong> is mass, in kilograms (kg).</li><li><strong>a</strong> is acceleration, in m s⁻².</li></ul>
+<p class="small">Rearranged: <strong>m = F ÷ a</strong>. If we know the force and measure the acceleration, we can find mass without gravity.</p></div>
+<p>Newton's first law adds one more idea. An object keeps still, or keeps moving at a steady speed in a straight line, unless a net force acts on it. A floating rock that you push will keep drifting.</p>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: same push, different masses</h4>
+<p>An astronaut pushes each rock with a force of 40 N. Find each acceleration.</p>
+<ol>
+<li>Rearrange: a = F ÷ m. <span class="why">Reason: we know F and m, and want a.</span></li>
+<li>20 kg rock: a = 40 ÷ 20 = <span class="ans">2.0 m s⁻²</span>. <span class="why">Reason: substitute F = 40 N and m = 20 kg.</span></li>
+<li>200 kg rock: a = 40 ÷ 200 = <span class="ans">0.20 m s⁻²</span>. <span class="why">Reason: substitute F = 40 N and m = 200 kg.</span></li>
+<li>Compare: ten times the mass gives one tenth of the acceleration. <span class="why">Reason: for a fixed force, a is inversely proportional to m.</span></li>
+</ol></div>
+<p><strong>In summary,</strong> inertia depends only on mass, so it works the same on Earth and in space. This is the property we can use to "weigh" the space rock.</p>`,
+  checks:[
+  {q:'Floating in space, you push a 20 kg rock and a 200 kg rock with the same force. Which accelerates more?',o:['The 20 kg rock','The 200 kg rock','Both accelerate the same, because neither has weight','Neither moves, because there is no gravity'],a:0,why:'a = F ÷ m. The smaller mass has less inertia, so the same force gives it a larger acceleration.'},
+  {q:'A force of 12 N gives a floating rock an acceleration of 4.0 m s⁻². What is its mass?',o:['3.0 kg','48 kg','0.33 kg','16 kg'],a:0,why:'m = F ÷ a = 12 ÷ 4.0 = 3.0 kg.'},
+  {q:'Is the inertia of a rock different in space?',o:['No. Inertia depends only on mass, which does not change.','Yes. Inertia is zero when there is no weight.','Yes. Inertia doubles in space.','No. Rocks have no inertia anywhere.'],a:0,why:'Inertia is resistance to a change in motion. It depends on mass, not on gravity.'}
+  ]},
+{ n:4, y:11, title:'The oscillating rod', label:'The method',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>An oscillating rod lets us use inertia to measure mass. More mass on the end makes the rod oscillate more slowly.</p></div>
+<p>Look at the equipment again: a flexible rod, sticky tape, known masses, clamps and a stopwatch. Clamp one end of the rod to a bench. Tape a mass to the free end. Pull the end to one side and let go. The rod vibrates from side to side.</p>
+<figure>${rodSVG}<figcaption>The rod is clamped to the bench, with a known mass taped to its free end.</figcaption></figure>
+<div class="box key"><h4><span class="ic" aria-hidden="true">🧠</span>Key note: the period</h4><p>The <strong>period</strong> (T) is the time for one complete oscillation. That means out to one side, across to the other side, and back to the start. It is measured in seconds.</p></div>
+<h3>Why does this measure mass, not weight?</h3>
+<p>The bent rod pulls the mass back towards the centre. A larger mass has more inertia, so the same pull gives it a smaller acceleration (F = ma). It moves back and forth more slowly, so its period is longer.</p>
+<p>The rod moves sideways, across the bench. Gravity acts downwards, so it does not pull the mass back to the centre. The rod's springiness does that job. This means the method still works when you are floating in space.</p>
+<h3>What affects how quickly it oscillates?</h3>
+<ul class="tight"><li><strong>The mass on the end.</strong> This is the variable we want to investigate.</li><li><strong>The length of rod</strong> sticking out past the clamp.</li><li><strong>The stiffness of the rod</strong>, such as its material and thickness.</li><li><strong>Where the mass is taped</strong> along the rod.</li><li><strong>How firmly it is clamped.</strong></li></ul>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: naming the variables</h4>
+<ol>
+<li>Independent variable: <span class="ans">the mass taped to the rod</span>. <span class="why">Reason: this is what we deliberately change.</span></li>
+<li>Dependent variable: <span class="ans">the period, T</span>. <span class="why">Reason: this is what we measure each time.</span></li>
+<li>Controlled variables: rod, length past the clamp, position of the mass, clamp tightness, and starting pull. <span class="why">Reason: any of these could change T, so they must stay the same.</span></li>
+</ol></div>
+<p><strong>In summary,</strong> the period of the rod depends on the mass's inertia rather than on its weight. This makes the oscillating rod a fair way to compare masses in space.</p>`,
+  checks:[
+  {q:'What is the period of an oscillating rod?',o:['The time for one complete oscillation','The number of oscillations in one second','The distance the end of the rod moves','The total time the rod keeps moving'],a:0,why:'The period is the time for one full oscillation: out, across and back to the start.'},
+  {q:'A larger mass is taped to the end of the rod. What happens to the period?',o:['It gets longer','It gets shorter','It stays the same','It becomes zero'],a:0,why:'More mass means more inertia, so the rod accelerates less and takes longer for each oscillation.'},
+  {q:'Why does the oscillating rod still work when floating in space?',o:['It depends on inertia, which needs mass but not weight.','It depends on weight, which is larger in space.','It uses the support force from the bench.','It only works on Earth.'],a:0,why:'The rod\'s springiness, not gravity, pulls the mass back. The period depends on the mass\'s inertia.'}
+  ]},
+{ n:5, y:11, title:'Planning a fair investigation', label:'Investigating',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>A good investigation changes one variable, measures one variable and keeps everything else the same. It also repeats measurements and times them as precisely as possible.</p></div>
+<p>Your task is to find out how the mass on the rod affects its period. Plan for three things.</p>
+<h3>1. How will you keep the test fair?</h3>
+<p>Change only the mass. Use the same rod, the same length past the clamp and the same position for the mass. Pull the rod the same distance each time. Use the same person to time it.</p>
+<h3>2. How many repeats?</h3>
+<p>Repeat each measurement at least three times and calculate the mean. Repeats reduce the effect of random errors. They also help you to spot a reading that does not fit, so you can measure it again.</p>
+<h3>3. How can you time a short period precisely?</h3>
+<p>The period is short, often less than one second. Your reaction time when starting and stopping a stopwatch is about 0.2 s. That error is large compared with a period of about 0.5 s.</p>
+<p>So, time <strong>10 complete oscillations</strong> and divide by 10. The reaction-time error is now shared across ten periods. Count from a fixed marker, such as a pencil mark at the centre, and start counting at zero.</p>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: finding the period from 10 oscillations</h4>
+<p>Three trials of 10 oscillations gave 4.62 s, 4.70 s and 4.58 s.</p>
+<ol>
+<li>Add the trials: 4.62 + 4.70 + 4.58 = 13.90 s. <span class="why">Reason: we need a total to find the mean.</span></li>
+<li>Find the mean time for 10 oscillations: 13.90 ÷ 3 = 4.63 s. <span class="why">Reason: the mean reduces the effect of random errors.</span></li>
+<li>Find one period: 4.63 ÷ 10 = <span class="ans">0.463 s</span>. <span class="why">Reason: the time covered 10 oscillations.</span></li>
+<li>Compare the errors: 0.2 ÷ 0.46 ≈ 43% for one oscillation, but 0.2 ÷ 4.6 ≈ 4% for ten. <span class="why">Reason: the same reaction-time error is a much smaller fraction of a longer time.</span></li>
+</ol></div>
+<p>A results table could look like this:</p>
+<div class="tablewrap"><table><thead><tr><th class="num">Mass (kg)</th><th class="num">10T trial 1 (s)</th><th class="num">10T trial 2 (s)</th><th class="num">10T trial 3 (s)</th><th class="num">Mean 10T (s)</th><th class="num">T (s)</th></tr></thead>
+<tbody><tr><td class="num">0.10</td><td class="num">3.86</td><td class="num">3.95</td><td class="num">3.90</td><td class="num">3.90</td><td class="num">0.39</td></tr>
+<tr><td class="num">0.20</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td><td class="num">…</td></tr></tbody></table></div>
+<p class="small muted">Use at least five different masses. Spread them across a range that should include the space rock's mass.</p>
+<p><strong>In summary,</strong> a fair test with repeats and multi-oscillation timing gives periods we can trust. Precise data makes the graph in Part 6 far more useful.</p>`,
+  checks:[
+  {q:'Why should you time 10 oscillations instead of just one?',o:['The reaction-time error becomes a much smaller percentage of the time measured.','It makes the rod oscillate faster.','Ten oscillations remove the need for any repeats.','It changes the period of the rod.'],a:0,why:'The reaction-time error stays about 0.2 s, but it is now spread across ten periods.'},
+  {q:'Ten oscillations take 7.2 s. What is the period?',o:['0.72 s','72 s','7.2 s','17.2 s'],a:0,why:'T = 7.2 ÷ 10 = 0.72 s.'},
+  {q:'Which of these is a controlled variable in this investigation?',o:['The length of rod past the clamp','The mass taped to the rod','The period of the rod','The mean time for 10 oscillations'],a:0,why:'Rod length affects the period, so it must stay the same. Mass is the independent variable, and period is the dependent variable.'}
+  ]},
+{ n:6, y:11, title:'Graphing and finding the rock\'s mass', label:'Using the trend',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>A graph of your results shows the trend between mass and period. You can then use the trend to find an unknown mass without weighing it.</p></div>
+<p>Plot <strong>mass</strong> on the horizontal axis, because it is the variable you changed. Plot <strong>period</strong> on the vertical axis, because it is the variable you measured. Then draw a smooth line of best fit. Do not join the dots.</p>
+<div class="tablewrap"><table><thead><tr><th class="num">Mass, m (kg)</th><th class="num">0.10</th><th class="num">0.20</th><th class="num">0.30</th><th class="num">0.40</th><th class="num">0.50</th></tr></thead>
+<tbody><tr><th class="num">Period, T (s)</th><td class="num">0.39</td><td class="num">0.50</td><td class="num">0.59</td><td class="num">0.67</td><td class="num">0.74</td></tr></tbody></table></div>
+<p class="small muted">Example data for a model rod.</p>
+<figure>${curveGraph({x:0.334,y:0.62,label:'rock: T = 0.62 s'})}<figcaption>Period against mass. The yellow dashed lines show how to read off the rock's mass.</figcaption></figure>
+<p>The trend is clear. As the mass increases, the period increases. However, the graph is a <strong>curve</strong>. Each extra 0.10 kg adds a little less time than the one before.</p>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: reading the rock's mass off the graph</h4>
+<ol>
+<li>Tape the space rock to the rod in the same position. Time 10 oscillations: 6.2 s. <span class="why">Reason: the same set-up keeps the comparison fair.</span></li>
+<li>Find the period: T = 6.2 ÷ 10 = 0.62 s. <span class="why">Reason: the time covered 10 oscillations.</span></li>
+<li>Find 0.62 s on the vertical axis. Go across to the line of best fit. <span class="why">Reason: the line shows the trend, not just single points.</span></li>
+<li>Go straight down to the mass axis. Read <span class="ans">m ≈ 0.33 kg</span>. <span class="why">Reason: this is the mass that gives a period of 0.62 s.</span></li>
+</ol></div>
+<p>This is <strong>interpolation</strong>, because 0.62 s lies inside the range of your data. Reading beyond your data is called extrapolation. It is less reliable, because you cannot be sure the trend continues.</p>
+<h3>Reflect on your investigation</h3>
+<p>Compare your answer with the actual mass. Suppose the actual mass is 0.35 kg. The difference is 0.02 kg. As a percentage, 0.02 ÷ 0.35 × 100 ≈ 6%. Then ask what you could improve. More masses, more repeats or timing 20 oscillations could all help.</p>
+<p><strong>In summary,</strong> the curved graph lets you find the rock's mass from its period. Reading a curve precisely is hard, however, which is the problem Year 12 physics solves.</p>`,
+  checks:[
+  {q:'Using the graph above, a rock has a period of 0.50 s. What is its mass?',o:['About 0.20 kg','About 0.50 kg','About 0.10 kg','About 0.40 kg'],a:0,why:'Go across from 0.50 s to the curve, then down. The curve passes through (0.20 kg, 0.50 s).'},
+  {q:'Why draw a smooth line of best fit instead of joining the dots?',o:['It shows the overall trend and reduces the effect of random errors in single points.','It makes the graph look neater but changes nothing.','Joining the dots is always more accurate.','The line must pass through every point.'],a:0,why:'Each point has some random error. A line of best fit averages these errors and shows the real trend.'},
+  {q:'Why is reading a mass inside your data range more reliable than outside it?',o:['Inside the range, the trend is supported by measured data.','Outside the range, the rod stops oscillating.','Inside the range, the period is always zero.','There is no difference in reliability.'],a:0,why:'Interpolation uses the measured trend. Extrapolation assumes the trend continues, which may not be true.'}
+  ]},
+{ n:7, y:12, title:'Non-linear relationships', label:'Year 12 step',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>A curved graph shows a non-linear relationship. Year 12 physics asks you to find the mathematical form of that relationship and to turn the curve into a straight line.</p></div>
+<p>This step links to NCEA Achievement Standard <strong>91168</strong>: "Carry out a practical physics investigation that leads to a non-linear mathematical relationship". The oscillating rod is a good example of this kind of investigation.</p>
+<div class="box key"><h4><span class="ic" aria-hidden="true">🧠</span>Key note: the inertia balance</h4>
+<p>For an oscillating rod like this, called an <strong>inertia balance</strong>, the period depends on the mass, not the weight. Theory predicts:</p>
+<div class="formula">T ∝ √m &nbsp;&nbsp;so&nbsp;&nbsp; T² ∝ m</div>
+<p class="small">So a graph of T² against m should be a straight line.</p></div>
+<h3>Turning the curve into a straight line</h3>
+<p>This process is called <strong>linearising</strong> the data. You process the raw data so that the new graph is straight. A straight line is far easier to test, to fit and to read than a curve.</p>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: calculating T² and finding the equation</h4>
+<ol>
+<li>Square each period. For 0.59 s: T² = 0.59 × 0.59 = 0.348 s². <span class="why">Reason: theory predicts that T² is proportional to m.</span></li>
+</ol>
+<div class="tablewrap"><table><thead><tr><th class="num">m (kg)</th><th class="num">0.10</th><th class="num">0.20</th><th class="num">0.30</th><th class="num">0.40</th><th class="num">0.50</th></tr></thead>
+<tbody><tr><th class="num">T (s)</th><td class="num">0.39</td><td class="num">0.50</td><td class="num">0.59</td><td class="num">0.67</td><td class="num">0.74</td></tr>
+<tr><th class="num">T² (s²)</th><td class="num">0.152</td><td class="num">0.250</td><td class="num">0.348</td><td class="num">0.449</td><td class="num">0.548</td></tr></tbody></table></div>
+<ol start="2">
+<li>Plot T² against m. The points lie on a straight line. <span class="why">Reason: a straight line confirms that T² is linearly related to m.</span></li>
+<li>Find the gradient: (0.548 − 0.152) ÷ (0.50 − 0.10) = 0.396 ÷ 0.40 ≈ <span class="ans">1.0 s² kg⁻¹</span>. <span class="why">Reason: gradient = rise ÷ run, with units of T² over units of m.</span></li>
+<li>Find the vertical intercept: 0.152 − (1.0 × 0.10) ≈ <span class="ans">0.05 s²</span>. <span class="why">Reason: from y = mx + c, so c = y − mx.</span></li>
+<li>Write the equation: <span class="ans">T² = 1.0m + 0.05</span>. <span class="why">Reason: physics equations use the real variables, not x and y.</span></li>
+<li>Use it for the rock: T = 0.62 s, so T² = 0.384 s². Then m = (0.384 − 0.05) ÷ 1.0 ≈ <span class="ans">0.33 kg</span>. <span class="why">Reason: rearranging the straight-line equation gives m directly.</span></li>
+</ol></div>
+<figure>${lineGraph()}<figcaption>T² against mass. The line is straight, but it does not pass through the origin.</figcaption></figure>
+<h3>Why does the line miss the origin?</h3>
+<p>The rod has mass of its own. Part of the rod moves with the taped mass. So even with no mass taped on, the rod still has a period. The line therefore cuts the T² axis above zero.</p>
+<p>If you extend the line backwards, it meets the mass axis at about −0.05 kg. This value is roughly the "effective mass" of the moving rod. It is a systematic effect, so it shifts every point by the same amount.</p>
+<div class="box warn"><h4><span class="ic" aria-hidden="true">⚠️</span>Watch out</h4><p>Do not force the line through the origin. Draw the best straight line through the points, then explain the intercept using the physics of the rod.</p></div>
+<p class="small muted">[I have not quoted the detailed grade criteria for AS 91168. Check the current NZQA assessment schedule for these.]</p>
+<p><strong>In summary,</strong> plotting T² against m turns the curve into a straight line, which gives a precise equation for the rock's mass. For many Year 12 students, this linearising step is the heart of a non-linear investigation.</p>`,
+  checks:[
+  {q:'Theory says T ∝ √m. What should you plot to get a straight line?',o:['T² against m','T against m²','√T against m','T against 1/m'],a:0,why:'Squaring both sides of T ∝ √m gives T² ∝ m. So T² against m is linear.'},
+  {q:'The straight line of T² against m does not pass through the origin. What is the most likely reason?',o:['The rod has mass of its own, which also oscillates.','The stopwatch was started too late every time.','Gravity is different on the bench.','The gradient of the line is negative.'],a:0,why:'Even with nothing taped on, the rod itself oscillates. So T² is above zero when m = 0.'},
+  {q:'A period is measured as T = 0.70 s. What is T²?',o:['0.49 s²','1.40 s²','0.84 s²','0.49 s'],a:0,why:'T² = 0.70 × 0.70 = 0.49. The unit is also squared, so it is s².'}
+  ]},
+{ n:8, y:12, title:'Bonus: astronauts and space rocks', label:'Bonus',
+  html:`
+<div class="box big"><h4><span class="ic" aria-hidden="true">🎯</span>Big idea</h4><p>Astronauts really do measure mass using inertia. Space rocks matter for science, and some are worth a great deal of money.</p></div>
+<h3>How astronauts measure mass</h3>
+<p>Astronauts on the International Space Station (ISS) lose some muscle and bone mass in microgravity. So they need to track their body mass, but they cannot use scales. The ISS has two devices that use the physics from this topic.</p>
+<ul class="tight">
+<li><strong>SLAMMD</strong> (Space Linear Acceleration Mass Measurement Device). Two springs push the astronaut with a known force. Optical sensors measure the astronaut's acceleration. The device then uses <strong>m = F ÷ a</strong>, just as in Part 3. It is accurate to about 0.2 kg.</li>
+<li><strong>BMMD</strong> (Body Mass Measurement Device), the Russian device. The astronaut oscillates on a spring. The period depends on the astronaut's mass, just like the rod in Part 4.</li>
+</ul>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: SLAMMD</h4>
+<p>The springs push with a force of 150 N. The astronaut accelerates at 2.0 m s⁻².</p>
+<ol>
+<li>Write the formula: m = F ÷ a. <span class="why">Reason: Newton's second law, rearranged for mass.</span></li>
+<li>Substitute and calculate: m = 150 ÷ 2.0 = <span class="ans">75 kg</span>. <span class="why">Reason: F = 150 N and a = 2.0 m s⁻².</span></li>
+</ol></div>
+<h3>Why space rocks matter</h3>
+<p>To <strong>assay</strong> a rock means to test it to find what it contains and what it is worth. Space rocks are worth assaying for several reasons.</p>
+<ul class="tight">
+<li><strong>Value.</strong> Meteorite prices vary widely. Common types sell for about $0.50 to $5 per gram. Rare Martian or Lunar specimens can sell for over $1,000 per gram. Scientifically important pieces, or well-recorded falls, can sell for even more.</li>
+<li><strong>What sets the value.</strong> Value depends on type, rarity, size, condition, appearance and scientific importance. A rock seen to fall, or a "hammer stone" that hit something, is worth more.</li>
+<li><strong>Science.</strong> Meteorites hold information about how the solar system formed.</li>
+</ul>
+<div class="box key"><h4><span class="ic" aria-hidden="true">🏠</span>A space rock in Tāmaki Makaurau</h4><p>On 12 June 2004, a 1.3 kg meteorite crashed through the roof of the Archer family's home in Ellerslie, Auckland. It bounced off their couch. It is the only meteorite known to have hit a house in Aotearoa. An American collector reportedly offered the family $50,000 for it. It is now called the Auckland meteorite and is owned by Auckland Museum.</p></div>
+<div class="worked"><h4><span aria-hidden="true">✏️</span> Worked example: valuing a space rock</h4>
+<p>A common meteorite has a mass of 1.3 kg. Estimate its value at $0.50 to $5 per gram.</p>
+<ol>
+<li>Convert to grams: 1.3 kg × 1000 = 1300 g. <span class="why">Reason: the price is per gram.</span></li>
+<li>Low estimate: 1300 × $0.50 = <span class="ans">$650</span>. <span class="why">Reason: multiply mass by the lowest price.</span></li>
+<li>High estimate: 1300 × $5 = <span class="ans">$6,500</span>. <span class="why">Reason: multiply mass by the highest price.</span></li>
+</ol>
+<p class="small muted">The Ellerslie offer was far above this range. A rock that hits a house is a famous "hammer stone".</p></div>
+<p><strong>In summary,</strong> the same physics you used with the rod lets real astronauts track their health. Measuring mass accurately in space could also matter as people collect and study more space rocks in future.</p>`,
+  checks:[
+  {q:'How does SLAMMD on the ISS find an astronaut\'s mass?',o:['It applies a known force and measures acceleration, then uses m = F ÷ a.','It measures the support force, like bathroom scales.','It uses W = mg with g = 9.8 m s⁻².','It measures how tall the astronaut is.'],a:0,why:'SLAMMD uses Newton\'s second law. Two springs give a known force, and sensors measure the acceleration.'},
+  {q:'The Russian BMMD works most like which part of this topic?',o:['The oscillating rod in Part 4','Bathroom scales in Part 2','Reading a graph in Part 6','W = mg in Part 1'],a:0,why:'The BMMD makes the astronaut oscillate on a spring. The period depends on mass, like the rod.'},
+  {q:'A 200 g common meteorite sells for $5 per gram. What is it worth?',o:['$1,000','$40','$100','$10,000'],a:0,why:'200 g × $5 per gram = $1,000.'}
+  ]}
+];
+
+/* ---------- WATCH content ---------- */
+const VIDEOS = {
+ 1:[{id:'_Z0X0yE8Ioc',t:'The Difference Between Mass and Weight',c:'Veritasium',look:'Listen for how people describe weight, and notice when they really mean mass.'},
+    {id:'U78NOo-oxOY',t:'Weight, Force, Mass & Gravity',c:'FuseSchool',look:'Look for the units of mass and weight, and how W = mg links them.'}],
+ 3:[{id:'2nUuvm5H12Q',t:"Newton's First Law",c:'FuseSchool',look:'Notice what an object does when no net force acts on it, and link this to a floating rock.'},
+    {id:'0efXaBr_JcU',t:"Newton's Second Law",c:'FuseSchool',look:'Watch how a larger mass needs a larger force to give the same acceleration.'}],
+ 5:[{id:'wSuBekqBzAI',t:'Evaluating a Scientific Experiment',c:'[channel not stated in the brief]',look:'Note the ways to judge whether results are accurate and reliable, such as repeats and controlled variables.'}],
+ 7:[{id:'LqKmjMRtxkA',t:'Linearizing Graphs in Physics',c:'MrEScienceTheater',look:'Watch how a curved graph is made straight by changing what is plotted on one axis.'},
+    {id:'lni7L6n6tlo',t:'Level 2 Non-linear Relationship Internal',c:'[channel not stated in the brief]',look:'Note the steps expected in a Level 2 non-linear investigation, from raw data to a final equation.'}],
+ 8:[{id:'Zzi4EQKBbOY',t:'How Do You Weigh Things in Space?',c:'SciShow',look:'Listen for the reason scales fail in orbit, and the physics used instead.'},
+    {id:'qE4OoE93fX0',t:'NASA astronauts explain SLAMMD',c:'NASA',look:'Watch where the known force comes from and how the acceleration is measured.'}]
+};
+
+/* ---------- MISSION questions ---------- */
+const QUIZ = [
+ {p:1,cat:'Mass or weight?',q:'Which of these quantities is measured in newtons?',o:['Weight','Mass','Inertia','Period'],a:0,why:'Weight is a force, so it is measured in newtons. Mass is measured in kilograms.'},
+ {p:1,cat:'Using W = mg',q:'An ore sample has a mass of 3.0 kg. What is its weight on Earth?',o:['29.4 N','3.0 N','0.31 N','12.8 N'],a:0,why:'W = mg = 3.0 × 9.8 = 29.4 N.'},
+ {p:1,cat:'Space travel',q:'The sample is flown from Earth to the Moon. What happens?',o:['Its mass stays the same, but its weight gets smaller.','Its mass and weight both get smaller.','Its mass gets smaller, but its weight stays the same.','Nothing changes at all.'],a:0,why:'Mass is the amount of matter. Weight depends on g, which is smaller on the Moon.'},
+ {p:2,cat:'Reading forces',q:'The rock sits still on scales on Earth. How do the two forces compare?',fig:'force',o:['The support force equals the weight.','The support force is bigger than the weight.','The support force is smaller than the weight.','Only the weight acts on the rock.'],a:0,why:'The rock is not accelerating, so the forces are balanced. The scales measure this support force.'},
+ {p:2,cat:'Floating in orbit',q:'On your ship, a floating rock is placed on scales. They read zero. Why?',o:['Nothing presses the rock onto the scales, so there is no support force.','The rock has no mass in space.','There is no gravity anywhere in space.','The scales only work in daylight.'],a:0,why:'The rock still has mass. It floats with the scales, so no support force acts and nothing is measured.'},
+ {p:3,cat:'Inertia',q:'You push a 20 kg rock and a 200 kg rock with the same force. Which accelerates more?',o:['The 20 kg rock','The 200 kg rock','They accelerate equally','Neither moves'],a:0,why:'The 200 kg rock has more inertia. The same force gives the smaller mass a larger acceleration.'},
+ {p:3,cat:'Using F = ma',q:'A 12 N force acts on a 4.0 kg rock. What is its acceleration?',o:['3.0 m s⁻²','48 m s⁻²','0.33 m s⁻²','8.0 m s⁻²'],a:0,why:'a = F ÷ m = 12 ÷ 4.0 = 3.0 m s⁻².'},
+ {p:4,cat:'The period',q:'What does "period" mean for the oscillating rod?',o:['The time for one complete oscillation','The number of oscillations each second','How far the rod bends','How long the whole experiment takes'],a:0,why:'The period is the time for one full oscillation: out, across and back.'},
+ {p:4,cat:'More mass',q:'You tape a bigger rock to the rod. What happens to the period?',o:['It increases','It decreases','It stays the same','It drops to zero'],a:0,why:'More mass means more inertia, so each oscillation takes longer.'},
+ {p:4,cat:'What matters?',q:'Which of these would NOT change the period of the rod?',o:['The colour of the sticky tape','The length of rod past the clamp','The mass on the end','The stiffness of the rod'],a:0,why:'Length, mass and stiffness all affect how quickly the rod oscillates. Tape colour has no physical effect.'},
+ {p:5,cat:'Precise timing',q:'Why do you time 10 oscillations instead of one?',o:['Your reaction-time error becomes a smaller percentage of the time.','It makes the rod oscillate faster.','It removes the need for repeats.','It makes the rod heavier.'],a:0,why:'The reaction-time error is about the same, but it is shared across ten periods.'},
+ {p:5,cat:'Quick calculation',q:'Ten oscillations take 6.2 s. What is the period?',o:['0.62 s','62 s','6.2 s','16.2 s'],a:0,why:'T = 6.2 ÷ 10 = 0.62 s.'},
+ {p:6,cat:'Reading the trend',q:'A rock gives a period of 0.59 s. Use the graph to find its mass.',fig:'curve',o:['About 0.30 kg','About 0.59 kg','About 0.10 kg','About 0.50 kg'],a:0,why:'Go across from 0.59 s to the curve, then down to the mass axis. This gives about 0.30 kg.'},
+ {p:6,cat:'Trusting the trend',q:'Why do scientists draw a line of best fit instead of joining the dots?',o:['It shows the trend and reduces the effect of random errors.','It is neater, but it gives the same answer.','Joining the dots is more accurate.','The line has to touch every point.'],a:0,why:'Each point has some random error. A line of best fit averages these errors out.'},
+ {p:7,cat:'Year 12: straighten it',y12:true,q:'For the rod, T ∝ √m. What should you plot to get a straight line?',o:['T² against m','T against m²','√T against m','T against 1/m'],a:0,why:'Squaring both sides gives T² ∝ m, so a graph of T² against m is straight.'},
+ {p:7,cat:'Year 12: the intercept',y12:true,q:'This graph of T² against m does not pass through the origin. Why?',fig:'line',o:['The rod has mass of its own.','The stopwatch was faulty.','Gravity changed during the test.','The data must be wrong.'],a:0,why:'Part of the rod oscillates too, so T² is above zero even when no mass is taped on.'},
+ {p:7,cat:'Year 12: calculate',y12:true,q:'A period is T = 0.50 s. What is T²?',o:['0.25 s²','1.0 s²','0.71 s²','0.25 s'],a:0,why:'T² = 0.50 × 0.50 = 0.25. The unit is squared too, so it is s².'},
+ {p:7,cat:'Year 12: use the equation',y12:true,q:'The line is T² = 1.0m + 0.05. A rock gives T² = 0.45 s². What is its mass?',o:['0.40 kg','0.45 kg','0.50 kg','0.05 kg'],a:0,why:'m = (0.45 − 0.05) ÷ 1.0 = 0.40 kg.'},
+ {p:8,cat:'Astronaut tech',q:'How does SLAMMD on the ISS measure an astronaut\'s mass?',o:['A known spring force and the measured acceleration give m = F ÷ a.','It works like bathroom scales.','It uses W = mg with g = 9.8 m s⁻².','It compares the astronaut with a space rock.'],a:0,why:'SLAMMD applies a known force from two springs, measures the acceleration and calculates mass.'},
+ {p:8,cat:'Assay value',q:'You assay a 200 g common meteorite at $5 per gram. What is it worth?',o:['$1,000','$40','$100','$10,000'],a:0,why:'200 g × $5 per gram = $1,000.'}
+];
+
+/* ---------- MCQ renderer (shared) ---------- */
+function mcqHTML(item,key){
+  // build shuffled order, remember correct index
+  const order = shuffle(item.o.map((t,i)=>i));
+  return {order, html: `<div class="opts" role="group" aria-label="Answer options">${order.map((oi,k)=>`<button class="opt" data-k="${key}" data-oi="${oi}">${esc(item.o[oi])}</button>`).join('')}</div><div class="fbslot" aria-live="polite"></div>`};
+}
+function markMCQ(container,item,chosenOi){
+  const ok = chosenOi===item.a;
+  container.querySelectorAll('.opt').forEach(b=>{
+    b.disabled=true; const oi=+b.dataset.oi;
+    if(oi===item.a){b.classList.add('correct');b.insertAdjacentHTML('afterbegin','<span class="mark" aria-hidden="true">✓</span>');b.setAttribute('aria-label',item.o[oi]+' (correct answer)');}
+    else if(oi===chosenOi){b.classList.add('wrong');b.insertAdjacentHTML('afterbegin','<span class="mark" aria-hidden="true">✗</span>');b.setAttribute('aria-label',item.o[oi]+' (your answer, incorrect)');}
+    else b.classList.add('dim');
+  });
+  container.querySelector('.fbslot').innerHTML = `<div class="fb ${ok?'good':'bad'}"><b>${ok?'Ka pai! That is correct.':'Not quite.'}</b> ${esc(item.why)}</div>`;
+  ok?sGood():sBad();
+  return ok;
+}
+
+/* ---------- READ view ---------- */
+let curPart = 1;
+function renderPartNav(){
+  const g = (y,label) => `<div class="partgroup"><span class="glabel">${label}</span>${PARTS.filter(p=>p.y===y).map(p=>`<button class="chip ${p.y===12?'y12':''}" data-part="${p.n}" ${p.n===curPart?'aria-current="true"':''}>${p.n}. ${esc(p.title)}</button>`).join('')}</div>`;
+  $('#partnav').innerHTML = g(11,'Year 11') + g(12,'Getting ready for Year 12');
+}
+function renderPart(n){
+  curPart=n; renderPartNav();
+  const p = PARTS[n-1];
+  const badge = p.y===11?'<span class="badge y11">Year 11</span>':'<span class="badge y12">Getting ready for Year 12</span>';
+  let checks = '';
+  p.checks.forEach((c,i)=>{const m=mcqHTML(c,`p${n}-${i}`);checks+=`<div class="q" data-cq="${i}"><div class="qtext">${i+1}. ${esc(c.q)}</div>${m.html}</div>`;});
+  $('#partBody').innerHTML = `
+    <p class="label ${p.y===12?'y12':''}">${badge}Part ${n} of 8 · ${esc(p.label)}</p>
+    <h2>${esc(p.title)}</h2>
+    ${p.html}
+    <section class="check" aria-labelledby="chk${n}"><h3 id="chk${n}">✅ Check your understanding</h3>${checks}</section>
+    <div class="navrow">
+      <button class="btn ghost" id="prevPart" ${n===1?'disabled':''}>← Part ${n-1||''}</button>
+      ${n<8?`<button class="btn" id="nextPart">Part ${n+1} →</button>`:`<button class="btn" id="toMission">Start the mission 🚀</button>`}
+    </div>`;
+  $('#partBody').querySelectorAll('.q').forEach(qel=>{
+    const item = p.checks[+qel.dataset.cq];
+    qel.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>markMCQ(qel,item,+b.dataset.oi)));
+  });
+  const pv=$('#prevPart'); if(pv) pv.onclick=()=>go('read-'+(n-1));
+  const nx=$('#nextPart'); if(nx) nx.onclick=()=>go('read-'+(n+1));
+  const tm=$('#toMission'); if(tm) tm.onclick=()=>go('mission');
+}
+$('#partnav').addEventListener('click',e=>{const b=e.target.closest('[data-part]');if(b)go('read-'+b.dataset.part);});
+
+/* ---------- WATCH view ---------- */
+function renderWatch(){
+  let h='';
+  PARTS.forEach(p=>{
+    const badge = p.y===11?'<span class="badge y11">Year 11</span>':'<span class="badge y12">Getting ready for Year 12</span>';
+    h+=`<div class="card"><p class="label ${p.y===12?'y12':''}">${badge}Part ${p.n}</p><h2>${esc(p.title)}</h2>`;
+    const vs = VIDEOS[p.n];
+    if(!vs){h+=`<p class="muted">There is no video for this part. Work through Part ${p.n} in the Read section instead.</p><button class="btn ghost" data-goread="${p.n}">Go to Read: Part ${p.n}</button>`;}
+    else vs.forEach(v=>{
+      const url=`https://www.youtube.com/watch?v=${v.id}`;
+      h+=`<div class="vid"><div class="vframe" id="vf-${v.id}"><button class="play" data-vid="${v.id}" data-title="${esc(v.t)}" aria-label="Play ${esc(v.t)} here"><span class="circle" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#1a0b2e"/></svg></span>Play here</button></div>
+      <div class="vmeta"><div class="t">${esc(v.t)}</div><div class="muted small">${esc(v.c)}</div>
+      <div class="small">If the video does not load: <a href="${url}" target="_blank" rel="noopener">${url}</a></div>
+      <p class="look"><b>Look for:</b> ${esc(v.look)}</p></div></div>`;
+    });
+    h+='</div>';
+  });
+  $('#watchBody').innerHTML=h;
+}
+$('#watchBody').addEventListener('click',e=>{
+  const b=e.target.closest('[data-vid]');
+  if(b){const id=b.dataset.vid;const f=document.getElementById('vf-'+id);
+    f.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${b.dataset.title}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen loading="lazy"></iframe>`;return;}
+  const r=e.target.closest('[data-goread]'); if(r) go('read-'+r.dataset.goread);
+});
+
+/* ---------- MISSION view ---------- */
+let M = null;
+function missionIntro(){
+  const best = load('wtsr-best',null);
+  $('#missionBody').innerHTML = `<div class="card hero">
+    <div class="big" aria-hidden="true">☄️</div>
+    <p class="label">Asteroid Assay Mission</p>
+    <h2>Kia ora, Assay Officer</h2>
+    <p>You are an astronaut on an asteroid assay ship. Your crew has collected ore samples, but the ship's scales are useless in orbit. Use your physics to assay each sample.</p>
+    <p class="muted">${QUIZ.length} questions. Parts 1 to 6 come first, then the Year 12 step, then a bonus. Each correct answer earns 10 credits. Three correct in a row starts a streak bonus.</p>
+    ${best!==null?`<p class="small muted">Your best score so far: ${best} / ${QUIZ.length}</p>`:''}
+    <button class="btn" id="startM">Launch mission 🚀</button></div>`;
+  $('#startM').onclick=()=>{M={i:0,score:0,credits:0,streak:0,best:0,missed:[]};missionQ();};
+}
+function statusHTML(){
+  const pct = Math.round(M.i/QUIZ.length*100);
+  return `<div class="card"><div class="status"><span>Question ${Math.min(M.i+1,QUIZ.length)}/${QUIZ.length}</span><span class="c cr">💎 Credits: ${M.credits}</span><span class="r st">🔥 Streak: ${M.streak}</span></div>
+  <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="${QUIZ.length}" aria-valuenow="${M.i}" aria-label="Mission progress"><i style="width:${pct}%"></i></div></div>`;
+}
+function missionQ(){
+  const item = QUIZ[M.i];
+  let fig='';
+  if(item.fig==='force') fig=`<figure class="qfig">${forceSVG}</figure>`;
+  if(item.fig==='curve') fig=`<figure class="qfig">${curveGraph(null,'Curved graph of period against mass. Points: 0.10 kg at 0.39 s, 0.20 kg at 0.50 s, 0.30 kg at 0.59 s, 0.40 kg at 0.67 s, 0.50 kg at 0.74 s.')}</figure>`;
+  if(item.fig==='line') fig=`<figure class="qfig">${lineGraph()}</figure>`;
+  const m = mcqHTML(item,'m'+M.i);
+  $('#missionBody').innerHTML = statusHTML() + `<div class="card qcard" id="qc">
+    <p class="label ${item.y12?'y12':''}">${item.y12?'<span class="badge y12">Getting ready for Year 12</span>':''}${esc(item.cat)}</p>
+    <h2>${esc(item.q)}</h2>${fig}${m.html}<div class="navrow" id="nextRow" hidden><span></span><button class="btn" id="nextQ">${M.i===QUIZ.length-1?'Finish mission':'Next sample →'}</button></div></div>`;
+  const qc=$('#qc');
+  qc.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    const ok = markMCQ(qc,item,+b.dataset.oi);
+    if(ok){M.score++;M.streak++;M.best=Math.max(M.best,M.streak);M.credits+=10+(M.streak>=3?5:0);}
+    else{M.streak=0;M.missed.push(M.i);}
+    // refresh status counters
+    const st=document.querySelector('.status');st.querySelector('.cr').textContent='💎 Credits: '+M.credits;st.querySelector('.st').textContent='🔥 Streak: '+M.streak;
+    $('#nextRow').hidden=false; $('#nextQ').focus();
+  }));
+  $('#nextQ').onclick=()=>{M.i++; if(M.i<QUIZ.length) missionQ(); else missionEnd(); window.scrollTo({top:0});};
+}
+function missionEnd(){
+  const n=QUIZ.length, s=M.score;
+  const prev=load('wtsr-best',null); if(prev===null||s>prev) store('wtsr-best',s);
+  let rank, msg;
+  if(s>=18){rank='Chief Assay Officer';msg='Ka rawe! Your physics is mission-ready, including the Year 12 step.';}
+  else if(s>=14){rank='Senior Assayer';msg='Strong work. Review the questions below to close the last gaps.';}
+  else if(s>=10){rank='Mission Specialist';msg='A solid start. Revisit the parts listed below, then fly again.';}
+  else {rank='Cadet';msg='More training needed. Work through the Read section, then try the mission again.';}
+  const parts=[...new Set(M.missed.map(i=>QUIZ[i].p))].sort((a,b)=>a-b);
+  $('#missionBody').innerHTML = `<div class="card hero">
+    <div class="big" aria-hidden="true">🏁</div><p class="label">Mission complete</p><h2>${rank}</h2><p>${msg}</p>
+    <div class="stats3"><div class="stat"><div class="n">${s}/${n}</div><div class="l">Samples assayed</div></div><div class="stat"><div class="n cr">${M.credits}</div><div class="l">Credits earned</div></div><div class="stat"><div class="n st">${M.best}</div><div class="l">Best streak</div></div></div>
+    ${M.missed.length?`<div style="text-align:left"><h3>Review these</h3><ul class="review">${M.missed.map(i=>`<li><strong>${esc(QUIZ[i].q)}</strong><br><span class="muted small">Answer: ${esc(QUIZ[i].o[QUIZ[i].a].replace(/\.$/,''))}. ${esc(QUIZ[i].why)}</span></li>`).join('')}</ul>
+    <p>Revisit: ${parts.map(p=>`<button class="linklike" data-goread="${p}">Part ${p}: ${esc(PARTS[p-1].title)}</button>`).join(' · ')}</p></div>`:'<p>Every sample assayed correctly. Outstanding.</p>'}
+    <div class="navrow"><button class="btn ghost" id="toRead">Back to Read</button><button class="btn" id="again">Fly again 🚀</button></div></div>`;
+  $('#again').onclick=()=>{M={i:0,score:0,credits:0,streak:0,best:0,missed:[]};missionQ();};
+  $('#toRead').onclick=()=>go('read-1');
+  $('#missionBody').querySelectorAll('[data-goread]').forEach(b=>b.onclick=()=>go('read-'+b.dataset.goread));
+}
+
+/* ---------- routing ---------- */
+function show(view){
+  ['read','watch','mission'].forEach(v=>{
+    $('#view-'+v).hidden = v!==view;
+    $('#tab-'+v).setAttribute('aria-selected', v===view?'true':'false');
+    $('#tab-'+v).tabIndex = v===view?0:-1;
+  });
+}
+function route(){
+  const h=(location.hash||'').replace('#','');
+  let m;
+  if(h==='watch'){show('watch');}
+  else if(h==='mission'){show('mission'); if(!M) missionIntro();}
+  else if((m=h.match(/^read-([1-8])$/))){show('read');renderPart(+m[1]);}
+  else {show('read');renderPart(curPart);}
+}
+function go(h){ if(location.hash==='#'+h) route(); else location.hash=h; window.scrollTo({top:0}); }
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  const v=t.dataset.view; go(v==='read'?'read-'+curPart:v);
+}));
+document.querySelector('.tabs').addEventListener('keydown',e=>{
+  const tabs=[...document.querySelectorAll('.tab')];const i=tabs.indexOf(document.activeElement);if(i<0)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const j=(i+(e.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[j].focus();tabs[j].click();}
+});
+window.addEventListener('hashchange',route);
+setSoundLabel(); renderWatch(); route();
+</script>
+</body>
+</html>
